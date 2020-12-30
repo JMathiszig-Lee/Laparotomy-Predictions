@@ -1,5 +1,6 @@
 import fastapi
 import uvicorn
+from models import Prediction
 
 api = fastapi.FastAPI()
 
@@ -17,9 +18,18 @@ def verify(calculation_id: str):
     return message
 
 
-@api.post("/predict")
-def predict():
+@api.post("/predict", response_model=Prediction)
+async def predict(prediction: Prediction):
     """ Stuff to do with prediction goes here """
+
+    # some function to get data ready for GAM's
+
+    # upload to redis que
+
+    # logging goes here if allowed
+
+    # retrieve from redis que and return
+
     return " Not yet built!"
 
 

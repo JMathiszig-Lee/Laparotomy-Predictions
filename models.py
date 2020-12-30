@@ -1,28 +1,20 @@
 from pydantic import BaseModel
 from typing import Optional
 from collections import namedtuple
+from enum import Enum, IntEnum
 
-##these should become classes of the type IntENum i think
-RESP_CATS = namedtuple(
-    "No dyspnea",
-    "Mild COPD or dyspnoea",
-    "Moderate COPD or dyspnoea",
-    "Fibrosis or consolidation or severe dyspnoea",
-)
+# these should become classes of the type IntENum i think
+class RespCats(str, Enum):
+    nodyspneoa = "NoDyspneoa"
+    mild = "Mild COPD or dyspnoea"
+    moderate = "Moderate COPD or dyspnoea"
+    fibrosis = "Fibrosis or consolidation or severe dyspnoea"
 
-CARD_CATS = namedtuple(
-    "No cardiac failure",
-    "Cardiovascular medications",
-    "Peripheral oedema or taking warfarin",
-    "Raised JVP or cardiomegaly",
-)
-
-INDICATIONS = namedtuple()
-
-MALIGNANCY = namedtuple()
-
-SOILING = namedtuple()
-
+class CardiacCats(str, Enum):
+    none = "No cardiac failure"
+    meds = "Cardiovascular medications"
+    oedema = "Peripheral oedema or taking warfarin"
+    cardiomegaly = "Raised JVP or cardiomegaly"
 
 class Prediction(BaseModel):
     """model to define inputs for prediction"""
@@ -39,8 +31,8 @@ class Prediction(BaseModel):
     Lactate: Optional[float]
     Albumin: Optional[int]
     GCS: int
-    Resp: RESP_CATS
-    Cardio: CARD_CATS
+    Resp: RespCats
+    Cardio: CardiacCats
     Sinus: bool
     CT_performed: bool
     Indication: str

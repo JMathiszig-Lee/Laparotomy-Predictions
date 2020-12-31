@@ -56,3 +56,10 @@ IMPUTATION_INPUT_VARIABLES = (
     'S03Pred_Peritsoil',
     'Indication'
 )
+
+MORTALITY_INPUT_VARIABLES = IMPUTATION_INPUT_VARIABLES + (
+    'S03PreOpLowestAlbumin',
+    'S03PreOpLowestAlbumin_missing',
+    'S03PreOpArterialBloodLactate',
+    'S03PreOpArterialBloodLactate_missing'
+)

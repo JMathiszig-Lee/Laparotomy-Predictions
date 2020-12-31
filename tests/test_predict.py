@@ -65,3 +65,7 @@ def test_quick_sample_logisticgam_mu():
 
     y_samples_mean = np.mean(y_samples, axis=0)
     assert all(np.abs(p_y - y_samples_mean) < 0.25)
+
+
+def test_impute():
+    assert False

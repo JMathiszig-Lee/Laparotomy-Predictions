@@ -2,7 +2,7 @@ from typing import Dict, Tuple
 import pandas as pd
 
 
-def winsorize_current(
+def winsorize(
     df: pd.DataFrame,
     winsor_thresholds: Dict[str, Tuple[float, float]]
 ) -> pd.DataFrame:

@@ -10,3 +10,27 @@ WINSOR_THRESHOLDS = {
     'S03PreOpLowestAlbumin': [3.9712000000000005, 73.0],
     'S03PreOpArterialBloodLactate': [0.3, 19.0]
 }
+
+LABEL_ENCODING = {
+    'S03ASAScore': (1.0, 2.0, 3.0, 4.0, 5.0),
+    'S03CardiacSigns': (1.0, 2.0, 4.0, 8.0),
+    'S03RespiratorySigns': (1.0, 2.0, 4.0, 8.0),
+    'S03DiagnosedMalignancy': (1.0, 2.0, 4.0, 8.0),
+    'S03Pred_Peritsoil': (1.0, 2.0, 4.0, 8.0),
+    'Indication': (
+        'S05Ind_SmallBowelObstruction',
+        'S05Ind_IntestinalObstruction',
+        'S05Ind_Perforation',
+        'S05Ind_LargeBowelObstruction',
+        'S05Ind_Peritonitis',
+        'S05Ind_Ischaemia',
+        'S05Ind_Haemorrhage',
+        'S05Ind_Colitis',
+        'S05Ind_Other',
+        'S05Ind_AbdominalAbscess',
+        'S05Ind_AnastomoticLeak',
+        'S05Ind_IncarceratedHernia',
+        'S05Ind_Volvulus',
+        'S05Ind_Missing'
+    )
+}

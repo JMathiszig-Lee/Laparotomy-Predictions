@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from numpy.random import RandomState
 from sklearn.preprocessing import QuantileTransformer
-from pygam import GAM, LinearGAM
+from pygam import GAM, LinearGAM, LogisticGAM
 from pygam.distributions import NormalDist
 
 
@@ -99,12 +99,14 @@ def impute(
     transformer: QuantileTransformer,
     random_seed: int
 ) -> np.ndarray:
-    """Probabilistically impute missing lactate or albumin values.
+    """Impute distribution of missing lactate or albumin values for a single
+        patient.
 
     Args:
-        features: Input data. Columns should follow the order specified in
-            IMPUTATION_INPUT_VARIABLES. Categorical variables should be
-            encoded as integers. Continuous variables should be Winsorized.
+        features: Input data. Will have single row. Columns should follow the
+            order specified in IMPUTATION_INPUT_VARIABLES. Categorical
+            variables should be encoded as integers. Continuous variables
+            should be Winsorized.
         n_samples: Number of lactate / albumin values to impute
         model: Pre-fitted lactate / albumin imputation GAM
         transformer: Pre-fitted tranformer to transform Gaussian GAM output
@@ -112,8 +114,7 @@ def impute(
         random_seed: Random seed
 
     Returns:
-        TODO: Specify meaning of each dimension of returned array
-        Predicted lactate / albumin values of shape (???)
+        Predicted lactate / albumin values of shape (n_samples,)
     """
     y_pred = quick_sample(
         gam=model,
@@ -122,4 +123,37 @@ def impute(
         n_draws=n_samples,
         random_seed=random_seed
     ).flatten()
-    return transformer.inverse_transform(y_pred.reshape(-1, 1))
+    return transformer.inverse_transform(y_pred.reshape(-1, 1)).flatten()
+
+
+def predict_mortality(
+    features: pd.DataFrame,
+    n_samples_per_row: int,
+    model: LogisticGAM,
+    random_seed: int
+) -> np.ndarray:
+    """Predict distribution of mortality risks for single patient.
+
+    Args:
+        features: Input data. Will have single row if both lactate and albumin
+            are non-missing. Otherwise, will have multiple rows where variables 
+            apart from imputed lactate / albumin are the same. Columns should 
+            follow the order specified in MORTALITY_INPUT_VARIABLES
+            Categorical variables should be encoded as integers. Continuous 
+            variables should be Winsorized.
+        n_samples_per_row: Number of mortality risks to predict for each row of
+            features
+        model: Pre-fitted mortality GAM
+        random_seed: Random seed
+
+    Returns:
+        Predicted mortality risks of shape
+            (features.shape[0] * n_samples_per_row,)
+    """
+    return quick_sample(
+        gam=model,
+        sample_at_X=features.values,
+        quantity="mu",
+        n_draws=n_samples_per_row,
+        random_seed=random_seed
+    ).flatten()

@@ -1,3 +1,5 @@
+RANDOM_SEED = 1
+
 WINSOR_THRESHOLDS = {
     'S01AgeOnArrival': [18.0, 96.0],
     'S03SerumCreatinine': [20.0, 758.7750000000087],

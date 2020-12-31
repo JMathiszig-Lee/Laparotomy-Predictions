@@ -69,3 +69,7 @@ def test_quick_sample_logisticgam_mu():
 
 def test_impute():
     assert False
+
+
+def test_predict_mortality():
+    assert False

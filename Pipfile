@@ -6,7 +6,10 @@ name = "pypi"
 [packages]
 fastapi = "*"
 uvicorn = "*"
-pygam = "*"
+pygam = "==0.8.0"
+numpy = "==1.19.2"
+pandas = "*"
+scikit-learn = "*"
 
 [dev-packages]
 pytest = "*"

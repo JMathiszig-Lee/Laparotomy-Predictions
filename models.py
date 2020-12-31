@@ -3,6 +3,7 @@ from typing import Optional
 from collections import namedtuple
 from enum import Enum, IntEnum
 
+
 # these should become classes of the type IntENum i think
 class RespCats(str, Enum):
     nodyspneoa = "NoDyspneoa"
@@ -10,15 +11,16 @@ class RespCats(str, Enum):
     moderate = "Moderate COPD or dyspnoea"
     fibrosis = "Fibrosis or consolidation or severe dyspnoea"
 
+
 class CardiacCats(str, Enum):
     none = "No cardiac failure"
     meds = "Cardiovascular medications"
     oedema = "Peripheral oedema or taking warfarin"
     cardiomegaly = "Raised JVP or cardiomegaly"
 
+
 class Prediction(BaseModel):
     """model to define inputs for prediction"""
-
     Age: int
     ASA: int
     HR: int

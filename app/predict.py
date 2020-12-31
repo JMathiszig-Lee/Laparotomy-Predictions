@@ -1,6 +1,8 @@
 import numpy as np
+import pandas as pd
 from numpy.random import RandomState
-from pygam import GAM
+from sklearn.preprocessing import QuantileTransformer
+from pygam import GAM, LinearGAM
 from pygam.distributions import NormalDist
 
 
@@ -88,3 +90,36 @@ def quick_sample(
             )
         else:
             raise NotImplementedError
+
+
+def impute(
+    features: pd.DataFrame,
+    n_samples: int,
+    model: LinearGAM,
+    transformer: QuantileTransformer,
+    random_seed: int
+) -> np.ndarray:
+    """Probabilistically impute missing lactate or albumin values.
+
+    Args:
+        features: Input data. Columns should follow the order specified in
+            IMPUTATION_INPUT_VARIABLES. Categorical variables should be
+            encoded as integers. Continuous variables should be Winsorized.
+        n_samples: Number of lactate / albumin values to impute
+        model: Pre-fitted lactate / albumin imputation GAM
+        transformer: Pre-fitted tranformer to transform Gaussian GAM output
+            back to lactate / albumin space
+        random_seed: Random seed
+
+    Returns:
+        TODO: Specify meaning of each dimension of returned array
+        Predicted lactate / albumin values of shape (???)
+    """
+    y_pred = quick_sample(
+        gam=model,
+        sample_at_X=features.values,
+        quantity='y',
+        n_draws=n_samples,
+        random_seed=random_seed
+    ).flatten()
+    return transformer.inverse_transform(y_pred.reshape(-1, 1))

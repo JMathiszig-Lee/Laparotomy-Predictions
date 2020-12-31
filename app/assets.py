@@ -34,3 +34,23 @@ LABEL_ENCODING = {
         'S05Ind_Missing'
     )
 }
+
+IMPUTATION_INPUT_VARIABLES = (
+    'S02PreOpCTPerformed',
+    'S03ECG',
+    'S01AgeOnArrival',
+    'S03SerumCreatinine',
+    'S03Sodium',
+    'S03Potassium',
+    'S03Urea',
+    'S03WhiteCellCount',
+    'S03Pulse',
+    'S03SystolicBloodPressure',
+    'S03GlasgowComaScore',
+    'S03ASAScore',
+    'S03CardiacSigns',
+    'S03RespiratorySigns',
+    'S03DiagnosedMalignancy',
+    'S03Pred_Peritsoil',
+    'Indication'
+)

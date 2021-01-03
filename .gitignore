@@ -129,4 +129,6 @@ dmypy.json
 .pyre/
 
 #vscode
-.vscode
+.vscode/
+
+production_assets.pkl

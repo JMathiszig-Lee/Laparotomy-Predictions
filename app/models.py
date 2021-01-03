@@ -38,13 +38,13 @@ class Prediction(BaseModel):
     Cardio: int
     Sinus: bool
     CT_performed: bool
-    Indication: str
-    Malignancy: str
-    Soiling: str
+    Indication: int
+    Malignancy: int
+    Soiling: int
 
 
 class ValidationError(Exception):
-    """validation error class to return meaningul errors to users"""
+    """validation error class to return meaningful errors to users"""
 
     def __init__(self, error_msg: str, status_code: int):
         super().__init__(error_msg)

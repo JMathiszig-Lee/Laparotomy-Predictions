@@ -1,7 +1,8 @@
-from typing import Dict, Tuple
+from . import constants
 import pandas as pd
-from models import Prediction, ValidationError
-import constants
+
+from .models import Prediction, ValidationError
+from typing import Dict, Tuple
 
 
 def pre_process_input(pred_input: Prediction):
@@ -17,23 +18,25 @@ def pre_process_input(pred_input: Prediction):
     Returns:
         Updates preditiction mode? extension? list? df?
     """
+    model_inputs = pred_input
+
     # validate categories are correctly encoded
-    validate_categories(pred_input)
+    validate_categories(model_input)
 
     # add missing indicators
-    if pred_input.Lactate:
-        pred_input.Lactate_missing = 0
+    if model_input.Lactate:
+        model_input.Lactate_missing = 0
     else:
-        pred_input.Lactate_missing = 1
+        model_input.Lactate_missing = 1
 
-    if pred_input.Albumin:
-        pred_input.Albumin_missing = 0
+    if model_input.Albumin:
+        model_input.Albumin_missing = 0
     else:
-        pred_input.Albumin_missing = 1
+        model_input.Albumin_missing = 1
 
     # windsorize continous variables
 
-    return pred_input
+    return model_input
 
 
 def validate_categories(input: Prediction):
@@ -50,17 +53,21 @@ def validate_categories(input: Prediction):
     if input.ASA not in constants.LABEL_ENCODING["S03ASAScore"]:
         error = f"Invalid ASA : {input.ASA}. Must be one of {constants.LABEL_ENCODING['S03ASAScore']}"
         raise ValidationError(error_msg=error, status_code=400)
+
     if input.Cardio not in constants.LABEL_ENCODING["S03CardiacSigns"]:
-        error = f"Invalid ASA : {input.Cardio}. Must be one of {constants.LABEL_ENCODING['S03CardiacSigns']}"
+        error = f"Invalid Cardiac Status : {input.Cardio}. Must be one of {constants.LABEL_ENCODING['S03CardiacSigns']}"
         raise ValidationError(error_msg=error, status_code=400)
+
     if input.Resp not in constants.LABEL_ENCODING["S03RespiratorySigns"]:
-        error = f"Invalid ASA : {input.Resp}. Must be one of {constants.LABEL_ENCODING['S03RespiratorySigns']}"
+        error = f"Invalid Respiratory Status : {input.Resp}. Must be one of {constants.LABEL_ENCODING['S03RespiratorySigns']}"
         raise ValidationError(error_msg=error, status_code=400)
+
     if input.Malignancy not in constants.LABEL_ENCODING["S03DiagnosedMalignancy"]:
-        error = f"Invalid ASA : {input.Malignancy}. Must be one of {constants.LABEL_ENCODING['S03DiagnosedMalignancy']}"
+        error = f"Invalid Malignancy : {input.Malignancy}. Must be one of {constants.LABEL_ENCODING['S03DiagnosedMalignancy']}"
         raise ValidationError(error_msg=error, status_code=400)
+
     if input.Soiling not in constants.LABEL_ENCODING["S03Pred_Peritsoil"]:
-        error = f"Invalid ASA : {input.Soiling }. Must be one of {constants.LABEL_ENCODING['S03Pred_Peritsoil']}"
+        error = f"Invalid Peritoneal Soiling : {input.Soiling }. Must be one of {constants.LABEL_ENCODING['S03Pred_Peritsoil']}"
         raise ValidationError(error_msg=error, status_code=400)
 
 

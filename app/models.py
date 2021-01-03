@@ -21,6 +21,7 @@ class CardiacCats(str, Enum):
 
 class Prediction(BaseModel):
     """model to define inputs for prediction"""
+
     Age: int
     ASA: int
     HR: int

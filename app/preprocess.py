@@ -3,8 +3,7 @@ import pandas as pd
 
 
 def winsorize(
-    df: pd.DataFrame,
-    winsor_thresholds: Dict[str, Tuple[float, float]]
+    df: pd.DataFrame, winsor_thresholds: Dict[str, Tuple[float, float]]
 ) -> pd.DataFrame:
     """Winsorize continuous input variables, according to present thresholds.
 

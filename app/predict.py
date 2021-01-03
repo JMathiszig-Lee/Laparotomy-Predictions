@@ -7,11 +7,7 @@ from pygam.distributions import NormalDist
 
 
 def quick_sample(
-    gam: GAM,
-    sample_at_X: np.ndarray,
-    quantity: str,
-    n_draws: int,
-    random_seed: int
+    gam: GAM, sample_at_X: np.ndarray, quantity: str, n_draws: int, random_seed: int
 ) -> np.ndarray:
     """
     Sample from the multivariate normal distribution over the GAM's
@@ -75,8 +71,7 @@ def quick_sample(
         return coef_draws
 
     linear_predictor = gam._modelmat(sample_at_X).dot(coef_draws.T)
-    mu_shape_n_draws_by_n_samples = gam.link.mu(linear_predictor,
-                                                gam.distribution).T
+    mu_shape_n_draws_by_n_samples = gam.link.mu(linear_predictor, gam.distribution).T
     if quantity == "mu":
         return mu_shape_n_draws_by_n_samples
     else:
@@ -84,9 +79,7 @@ def quick_sample(
             scale = gam.distribution.scale
             standard_deviation = scale ** 0.5 if scale else 1.0
             return rnd.normal(
-                loc=mu_shape_n_draws_by_n_samples,
-                scale=standard_deviation,
-                size=None
+                loc=mu_shape_n_draws_by_n_samples, scale=standard_deviation, size=None
             )
         else:
             raise NotImplementedError
@@ -97,7 +90,7 @@ def impute(
     n_samples: int,
     model: LinearGAM,
     transformer: QuantileTransformer,
-    random_seed: int
+    random_seed: int,
 ) -> np.ndarray:
     """Impute distribution of missing lactate or albumin values for a single
         patient.
@@ -119,18 +112,15 @@ def impute(
     y_pred = quick_sample(
         gam=model,
         sample_at_X=features.values,
-        quantity='y',
+        quantity="y",
         n_draws=n_samples,
-        random_seed=random_seed
+        random_seed=random_seed,
     ).flatten()
     return transformer.inverse_transform(y_pred.reshape(-1, 1)).flatten()
 
 
 def predict_mortality(
-    features: pd.DataFrame,
-    n_samples_per_row: int,
-    model: LogisticGAM,
-    random_seed: int
+    features: pd.DataFrame, n_samples_per_row: int, model: LogisticGAM, random_seed: int
 ) -> np.ndarray:
     """Predict distribution of mortality risks for single patient.
 
@@ -155,5 +145,5 @@ def predict_mortality(
         sample_at_X=features.values,
         quantity="mu",
         n_draws=n_samples_per_row,
-        random_seed=random_seed
+        random_seed=random_seed,
     ).flatten()

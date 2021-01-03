@@ -63,5 +63,5 @@ def complete_input(
             else:
                 j.Albumin = i
             completed.append(j.copy())
- 
+
     return completed

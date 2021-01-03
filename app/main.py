@@ -1,7 +1,6 @@
 import fastapi
 import uvicorn
 import uuid
-import sys
 
 from typing import List
 from models import Prediction, ProcessedPrediction
@@ -47,12 +46,12 @@ async def predict(prediction: Prediction):
             filled_in = complete_input(
                 imputed=lactates, impute_list=[processed], Lactate=True
             )
-            
+
             if processed.Albumin_missing == 1:
                 filled_in = complete_input(
                     imputed=albumins, impute_list=filled_in, Lactate=False
                 )
-        
+
         elif processed.Albumin_missing == 1:
             filled_in = complete_input(
                 imputed=albumins, impute_list=[processed], Lactate=False
@@ -72,7 +71,7 @@ async def predict(prediction: Prediction):
         )
 
     prediction_result = {"ID": predict_ID, "Seed": seed, "Result": result.tolist()}
-    
+
     # logging goes here if allowed
 
     return fastapi.responses.JSONResponse(content=prediction_result, status_code=200)

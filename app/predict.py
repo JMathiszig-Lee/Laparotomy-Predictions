@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from numpy.random import RandomState
 from sklearn.preprocessing import QuantileTransformer
-from pygam import GAM, LinearGAM, LogisticGAM
+from pygam import GAM, LinearGAM
 from pygam.distributions import NormalDist
 from Fixtures.gams import MORTALTIY_GAM
 

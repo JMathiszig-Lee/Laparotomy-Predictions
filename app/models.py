@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 
 
 class Prediction(BaseModel):
@@ -82,12 +82,13 @@ class ProcessedPrediction(Prediction):
         ]
         return input_list
 
+
 class PredictionResult(BaseModel):
     ID: str
     Seed: int
     Result: List[float]
 
-    
+
 class ValidationError(Exception):
     """validation error class to return meaningful errors to users"""
 

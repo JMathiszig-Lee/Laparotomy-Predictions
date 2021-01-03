@@ -39,10 +39,12 @@ def test_winsorize():
 
 def test_indications_added():
     pre_model = Prediction(**pred)
-    validated = preprocess.validate_categories(pre_model)
+    validated = preprocess.pre_process_input(pre_model)
 
     assert validated.Lactate_missing == 0
     assert validated.Albumin_missing == 1
+
+    print(validated)
 
 
 def test_validate_cats():

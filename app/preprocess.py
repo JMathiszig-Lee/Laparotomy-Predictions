@@ -1,11 +1,11 @@
 from . import constants
 import pandas as pd
 
-from .models import Prediction, ValidationError
+from .models import Prediction, ValidationError, ProcessedPrediction
 from typing import Dict, Tuple
 
 
-def pre_process_input(pred_input: Prediction):
+def pre_process_input(pred_input: Prediction) -> ProcessedPrediction:
     """
     Takes API input and pre-processes ready for model prediction
 
@@ -18,25 +18,21 @@ def pre_process_input(pred_input: Prediction):
     Returns:
         Updates preditiction mode? extension? list? df?
     """
-    model_inputs = pred_input
-
     # validate categories are correctly encoded
-    validate_categories(model_input)
+    validate_categories(pred_input)
+
+    processed = dict(pred_input)
 
     # add missing indicators
-    if model_input.Lactate:
-        model_input.Lactate_missing = 0
-    else:
-        model_input.Lactate_missing = 1
+    if pred_input.Lactate:
+        processed["Lactate_missing"] = 0
 
-    if model_input.Albumin:
-        model_input.Albumin_missing = 0
-    else:
-        model_input.Albumin_missing = 1
+    if pred_input.Albumin:
+        processed["Albumin_missing"] = 0
 
     # windsorize continous variables
 
-    return model_input
+    return ProcessedPrediction(**processed)
 
 
 def validate_categories(input: Prediction):

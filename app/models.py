@@ -43,6 +43,11 @@ class Prediction(BaseModel):
     Soiling: int
 
 
+class ProcessedPrediction(Prediction):
+    Lactate_missing: int = 1
+    Albumin_missing: int = 1
+
+
 class ValidationError(Exception):
     """validation error class to return meaningful errors to users"""
 

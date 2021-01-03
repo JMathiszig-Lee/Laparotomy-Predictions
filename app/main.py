@@ -4,23 +4,28 @@ import uvicorn
 from prediction import predict_api
 from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
+from starlette.requests import Request
+
 
 templates= Jinja2Templates('templates')
 
 api = fastapi.FastAPI()
 
+
 def configure():
     configure_routing()
+
 
 def configure_routing():
     api.mount('/static', StaticFiles(directory='static'), name='static')
     api.include_router(predict_api.router)
 
 
-@api.get("/")
-def index():
+@api.get("/", include_in_schema=False)
+async def index(request: Request):
     """ index page """
-    return "hello world"
+    data = {'request': request}
+    return templates.TemplateResponse('index.html', data)
 
 
 @api.get("/verify")

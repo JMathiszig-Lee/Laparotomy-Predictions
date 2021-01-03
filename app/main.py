@@ -1,14 +1,20 @@
 import fastapi
 import uvicorn
-import uuid
 
-from typing import List
-from models import Prediction, ProcessedPrediction
-from preprocess import pre_process_input
-from predict import predict_mortality
-from impute import impute_lactate, impute_albumin, complete_input
+from prediction import predict_api
+from starlette.staticfiles import StaticFiles
+from starlette.templating import Jinja2Templates
+
+templates= Jinja2Templates('templates')
 
 api = fastapi.FastAPI()
+
+def configure():
+    configure_routing()
+
+def configure_routing():
+    api.mount('/static', StaticFiles(directory='static'), name='static')
+    api.include_router(predict_api.router)
 
 
 @api.get("/")
@@ -24,57 +30,8 @@ def verify(calculation_id: str):
     return message
 
 
-@api.post("/predict")
-async def predict(prediction: Prediction):
-    """ Stuff to do with prediction goes here """
-
-    predict_ID = str(uuid.uuid4())
-    seed = abs(hash(predict_ID)) & 0xFFFFFFFF
-
-    processed = pre_process_input(prediction)
-
-    if processed.Lactate_missing == 0 and processed.Albumin_missing == 0:
-        # go straight to mortality prediction
-        result = predict_mortality([processed.convert_to_list()], 100, seed)
-    else:
-        lactates = await impute_lactate(processed.convert_to_list()[:17], 5, seed)
-        albumins = await impute_albumin(processed.convert_to_list()[:17], 5, seed)
-
-        filled_in: List(ProcessedPrediction) = []
-
-        if processed.Lactate_missing == 1:
-            filled_in = complete_input(
-                imputed=lactates, impute_list=[processed], Lactate=True
-            )
-
-            if processed.Albumin_missing == 1:
-                filled_in = complete_input(
-                    imputed=albumins, impute_list=filled_in, Lactate=False
-                )
-
-        elif processed.Albumin_missing == 1:
-            filled_in = complete_input(
-                imputed=albumins, impute_list=[processed], Lactate=False
-            )
-
-            if processed.Lactate_missing == 1:
-                filled_in = complete_input(
-                    imputed=lactates, impute_list=filled_in, Lactate=True
-                )
-
-        filled_lists = []
-        for i in filled_in:
-            filled_lists.append(i.convert_to_list())
-
-        result = predict_mortality(
-            features=filled_lists, n_samples_per_row=10, random_seed=seed
-        )
-
-    prediction_result = {"ID": predict_ID, "Seed": seed, "Result": result.tolist()}
-
-    # logging goes here if allowed
-
-    return fastapi.responses.JSONResponse(content=prediction_result, status_code=200)
-
-
-uvicorn.run(api, port=8000, host="127.0.0.1")
+if __name__ == '__main__':
+    configure()
+    uvicorn.run(api, port=8000, host='127.0.0.1')
+else:
+    configure()

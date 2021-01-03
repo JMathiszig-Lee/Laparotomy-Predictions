@@ -1,5 +1,5 @@
 import pytest
-import app.preprocess as preprocess
+import app.prediction.preprocess as preprocess
 from app.models import Prediction, ValidationError
 
 pred = {

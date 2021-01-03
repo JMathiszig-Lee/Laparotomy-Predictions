@@ -34,10 +34,20 @@ class Prediction(BaseModel):
     Lactate: Optional[float]
     Albumin: Optional[int]
     GCS: int
-    Resp: RespCats
-    Cardio: CardiacCats
+    Resp: int
+    Cardio: int
     Sinus: bool
     CT_performed: bool
     Indication: str
     Malignancy: str
     Soiling: str
+
+
+class ValidationError(Exception):
+    """validation error class to return meaningul errors to users"""
+
+    def __init__(self, error_msg: str, status_code: int):
+        super().__init__(error_msg)
+
+        self.status_code = status_code
+        self.error_msg = error_msg

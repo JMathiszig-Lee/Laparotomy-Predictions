@@ -23,8 +23,7 @@ async def predict(prediction: Prediction):
     """ Stuff to do with prediction goes here """
 
     # some function to get data ready for GAM's
-
-    # upload to redis que
+    # make lactate and albumin imputation calls asynchronus for speed
 
     # logging goes here if allowed
 

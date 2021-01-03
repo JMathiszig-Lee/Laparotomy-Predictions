@@ -126,10 +126,10 @@ def predict_mortality(
 
     Args:
         features: Input data. Will have single row if both lactate and albumin
-            are non-missing. Otherwise, will have multiple rows where variables 
-            apart from imputed lactate / albumin are the same. Columns should 
+            are non-missing. Otherwise, will have multiple rows where variables
+            apart from imputed lactate / albumin are the same. Columns should
             follow the order specified in MORTALITY_INPUT_VARIABLES
-            Categorical variables should be encoded as integers. Continuous 
+            Categorical variables should be encoded as integers. Continuous
             variables should be Winsorized.
         n_samples_per_row: Number of mortality risks to predict for each row of
             features

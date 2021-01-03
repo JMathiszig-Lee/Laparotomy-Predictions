@@ -6,16 +6,18 @@ name = "pypi"
 [packages]
 fastapi = "*"
 uvicorn = "*"
-pygam = "*"
-pandas = "*"
-sklearn = "*"
+pygam = "==0.8.0"
+numpy = "==1.19.2"
+pandas = "==1.1.2"
+scipy = "==1.5.2"
+scikit-learn = "==0.23.2"
 
 [dev-packages]
 pytest = "*"
 flake8 = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3.8.6"
 
 [pipenv]
 allow_prereleases = true

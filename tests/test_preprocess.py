@@ -1,4 +1,3 @@
-import pandas as pd
 import pytest
 import app.preprocess as preprocess
 from app.models import Prediction, ValidationError
@@ -23,8 +22,6 @@ pred = {
     "Malignancy": 2,
     "Soiling": 2,
 }
-
-
 
 
 def test_winsorize():

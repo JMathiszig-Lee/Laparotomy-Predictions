@@ -1,7 +1,6 @@
-from . import constants
-import pandas as pd
+from Fixtures import constants
 
-from .models import Prediction, ValidationError, ProcessedPrediction
+from models import Prediction, ValidationError, ProcessedPrediction
 from typing import Dict, Tuple
 
 
@@ -16,7 +15,7 @@ def pre_process_input(pred_input: Prediction) -> ProcessedPrediction:
     Inputs:
         Prediction model
     Returns:
-        Updates preditiction mode? extension? list? df?
+        ProcessedPrediction
     """
     # validate categories are correctly encoded
     validate_categories(pred_input)
@@ -68,9 +67,7 @@ def validate_categories(input: Prediction):
         raise ValidationError(error_msg=error, status_code=400)
 
 
-def winsorize(
-    df: Dict, winsor_thresholds: Dict[str, Tuple[float, float]]
-) -> Dict:
+def winsorize(df: Dict, winsor_thresholds: Dict[str, Tuple[float, float]]) -> Dict:
     """Winsorize continuous input variables, according to present thresholds.
 
     Args:

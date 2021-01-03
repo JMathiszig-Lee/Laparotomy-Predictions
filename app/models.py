@@ -25,6 +25,31 @@ class Prediction(BaseModel):
     Malignancy: int
     Soiling: int
 
+    class Config:
+        schema_extra = {
+            "example": {
+                "Age": 40,
+                "ASA": 3,
+                "HR": 87,
+                "SBP": 120,
+                "WCC": 13,
+                "Na": 135,
+                "K": 8,
+                "Urea": 2,
+                "Creat": 4,
+                "Lactate": 3.5,
+                "Albumin": 40,
+                "GCS": 15,
+                "Resp": 2,
+                "Cardio": 1,
+                "Sinus": False,
+                "CT_performed": True,
+                "Indication": 1,
+                "Malignancy": 2,
+                "Soiling": 2
+            }
+        }
+
 
 class ProcessedPrediction(Prediction):
     Lactate_missing: int = 1

@@ -4,6 +4,7 @@ from numpy.random import RandomState
 from sklearn.preprocessing import QuantileTransformer
 from pygam import GAM, LinearGAM, LogisticGAM
 from pygam.distributions import NormalDist
+from Fixtures.gams import MORTALTIY_GAM
 
 
 def quick_sample(
@@ -111,7 +112,7 @@ def impute(
     """
     y_pred = quick_sample(
         gam=model,
-        sample_at_X=features.values,
+        sample_at_X=features,
         quantity="y",
         n_draws=n_samples,
         random_seed=random_seed,
@@ -120,7 +121,7 @@ def impute(
 
 
 def predict_mortality(
-    features: pd.DataFrame, n_samples_per_row: int, model: LogisticGAM, random_seed: int
+    features: np.array, n_samples_per_row: int, random_seed: int
 ) -> np.ndarray:
     """Predict distribution of mortality risks for single patient.
 
@@ -141,8 +142,8 @@ def predict_mortality(
             (features.shape[0] * n_samples_per_row,)
     """
     return quick_sample(
-        gam=model,
-        sample_at_X=features.values,
+        gam=MORTALTIY_GAM,
+        sample_at_X=features,
         quantity="mu",
         n_draws=n_samples_per_row,
         random_seed=random_seed,

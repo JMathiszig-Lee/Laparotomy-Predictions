@@ -46,7 +46,7 @@ class Prediction(BaseModel):
                 "CT_performed": True,
                 "Indication": 1,
                 "Malignancy": 2,
-                "Soiling": 2
+                "Soiling": 2,
             }
         }
 
@@ -82,7 +82,12 @@ class ProcessedPrediction(Prediction):
         ]
         return input_list
 
+class PredictionResult(BaseModel):
+    ID: str
+    Seed: int
+    Result: List[float]
 
+    
 class ValidationError(Exception):
     """validation error class to return meaningful errors to users"""
 

@@ -9,7 +9,7 @@ from typing import List
 from models import ProcessedPrediction
 
 
-def impute_lactate(missing_vars: List, n_samples: int, seed: int) -> List[List]:
+async def impute_lactate(missing_vars: List, n_samples: int, seed: int) -> List[List]:
     """
     Imputes lactate as per parent function
     """
@@ -24,7 +24,7 @@ def impute_lactate(missing_vars: List, n_samples: int, seed: int) -> List[List]:
     return imputed_values
 
 
-def impute_albumin(missing_vars: List, n_samples: int, seed: int) -> List[List]:
+async def impute_albumin(missing_vars: List, n_samples: int, seed: int) -> List[List]:
     """
     Imputes albumin as per parent function
     """
@@ -40,14 +40,14 @@ def impute_albumin(missing_vars: List, n_samples: int, seed: int) -> List[List]:
 
 
 def complete_input(
-    imputed: List, input_list: List[ProcessedPrediction], Lactate: bool = True
+    imputed: List, impute_list: List[ProcessedPrediction], Lactate: bool = True
 ) -> List[ProcessedPrediction]:
     """
     Takes imputed variables and adds them to inputs
 
     Args:
         imputed: list of imputed variables
-        input_list: Prediction object or list of objects with missing variable to be filled in
+        impute_list: Prediction object or list of objects with missing variable to be filled in
         Lactate: if true variable to be filled in is lactate, else albumin will be populated
 
     Returns:
@@ -56,14 +56,12 @@ def complete_input(
     """
 
     completed = []
-
     for i in imputed:
-        for j in input_list:
+        for j in impute_list:
             if Lactate is True:
                 j.Lactate = i
             else:
                 j.Albumin = i
-
-            completed.append(j)
-
+            completed.append(j.copy())
+ 
     return completed

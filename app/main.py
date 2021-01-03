@@ -26,11 +26,11 @@ def verify(calculation_id: str):
 
 
 @api.post("/predict")
-def predict(prediction: Prediction):
+async def predict(prediction: Prediction):
     """ Stuff to do with prediction goes here """
 
     predict_ID = str(uuid.uuid4())
-    seed = abs(hash(predict_ID)) & 0xffffffff
+    seed = abs(hash(predict_ID)) & 0xFFFFFFFF
 
     processed = pre_process_input(prediction)
 
@@ -38,27 +38,29 @@ def predict(prediction: Prediction):
         # go straight to mortality prediction
         result = predict_mortality([processed.convert_to_list()], 100, seed)
     else:
-        lactates = impute_lactate(processed.convert_to_list()[:17], 50, seed)
-        albumins = impute_albumin(processed.convert_to_list()[:17], 50, seed)
+        lactates = await impute_lactate(processed.convert_to_list()[:17], 5, seed)
+        albumins = await impute_albumin(processed.convert_to_list()[:17], 5, seed)
 
         filled_in: List(ProcessedPrediction) = []
 
         if processed.Lactate_missing == 1:
-            filled_in = (
-                complete_input(imputed=lactates, input_list=[processed], Lactate=True)
+            filled_in = complete_input(
+                imputed=lactates, impute_list=[processed], Lactate=True
             )
+            
             if processed.Albumin_missing == 1:
                 filled_in = complete_input(
-                    imputed=albumins, input_list=filled_in, Lactate=False
+                    imputed=albumins, impute_list=filled_in, Lactate=False
                 )
-
-        if processed.Albumin_missing == 1:
-            filled_in = (
-                complete_input(imputed=albumins, input_list=[processed], Lactate=False)
+        
+        elif processed.Albumin_missing == 1:
+            filled_in = complete_input(
+                imputed=albumins, impute_list=[processed], Lactate=False
             )
+
             if processed.Lactate_missing == 1:
                 filled_in = complete_input(
-                    imputed=lactates, input_list=filled_in, Lactate=True
+                    imputed=lactates, impute_list=filled_in, Lactate=True
                 )
 
         filled_lists = []
@@ -66,17 +68,14 @@ def predict(prediction: Prediction):
             filled_lists.append(i.convert_to_list())
 
         result = predict_mortality(
-            features=filled_lists, n_samples_per_row=100, random_seed=seed
+            features=filled_lists, n_samples_per_row=10, random_seed=seed
         )
 
-
     prediction_result = {"ID": predict_ID, "Seed": seed, "Result": result.tolist()}
-     # logging goes here if allowed
+    
+    # logging goes here if allowed
 
-    return fastapi.responses.JSONResponse(
-        content=prediction_result,
-        status_code= 200
-    )
+    return fastapi.responses.JSONResponse(content=prediction_result, status_code=200)
 
 
 uvicorn.run(api, port=8000, host="127.0.0.1")

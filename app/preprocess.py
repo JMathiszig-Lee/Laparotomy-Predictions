@@ -31,8 +31,9 @@ def pre_process_input(pred_input: Prediction) -> ProcessedPrediction:
         processed["Albumin_missing"] = 0
 
     # windsorize continous variables
+    winzored = winsorize(processed, constants.WINSOR_THRESHOLDS)
 
-    return ProcessedPrediction(**processed)
+    return ProcessedPrediction(**winzored)
 
 
 def validate_categories(input: Prediction):
@@ -68,8 +69,8 @@ def validate_categories(input: Prediction):
 
 
 def winsorize(
-    df: pd.DataFrame, winsor_thresholds: Dict[str, Tuple[float, float]]
-) -> pd.DataFrame:
+    df: Dict, winsor_thresholds: Dict[str, Tuple[float, float]]
+) -> Dict:
     """Winsorize continuous input variables, according to present thresholds.
 
     Args:
@@ -81,6 +82,9 @@ def winsorize(
         df: Same as input df, except with Winsorized continuous variables
     """
     for v, threshold in winsor_thresholds.items():
-        df.loc[df[v] < threshold[0], v] = threshold[0]
-        df.loc[df[v] > threshold[1], v] = threshold[1]
+        if df[v]:
+            if df[v] < threshold[0]:
+                df[v] = threshold[0]
+            elif df[v] > threshold[1]:
+                df[v] = threshold[1]
     return df

@@ -1,22 +1,5 @@
 from pydantic import BaseModel
 from typing import Optional
-from collections import namedtuple
-from enum import Enum, IntEnum
-
-
-# these should become classes of the type IntENum i think
-class RespCats(str, Enum):
-    nodyspneoa = "NoDyspneoa"
-    mild = "Mild COPD or dyspnoea"
-    moderate = "Moderate COPD or dyspnoea"
-    fibrosis = "Fibrosis or consolidation or severe dyspnoea"
-
-
-class CardiacCats(str, Enum):
-    none = "No cardiac failure"
-    meds = "Cardiovascular medications"
-    oedema = "Peripheral oedema or taking warfarin"
-    cardiomegaly = "Raised JVP or cardiomegaly"
 
 
 class Prediction(BaseModel):
@@ -46,6 +29,33 @@ class Prediction(BaseModel):
 class ProcessedPrediction(Prediction):
     Lactate_missing: int = 1
     Albumin_missing: int = 1
+
+    def convert_to_list(self):
+        """ converts object to list in correct order """
+        input_list = [
+            self.CT_performed,
+            self.Sinus,
+            self.Age,
+            self.Creat,
+            self.Na,
+            self.K,
+            self.Urea,
+            self.WCC,
+            self.HR,
+            self.SBP,
+            self.GCS,
+            self.ASA,
+            self.Cardio,
+            self.Resp,
+            self.Malignancy,
+            self.Soiling,
+            self.Indication,
+            self.Albumin,
+            self.Albumin_missing,
+            self.Lactate,
+            self.Lactate_missing,
+        ]
+        return input_list
 
 
 class ValidationError(Exception):

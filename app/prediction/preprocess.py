@@ -1,5 +1,5 @@
+from Fixtures.gams import CATEGORY_ENCODING
 from Fixtures import constants
-
 from models import Prediction, ValidationError, ProcessedPrediction
 from typing import Dict, Tuple
 
@@ -46,24 +46,32 @@ def validate_categories(input: Prediction):
         Validation error if present
     """
 
-    if input.ASA not in constants.LABEL_ENCODING["S03ASAScore"]:
-        error = f"Invalid ASA : {input.ASA}. Must be one of {constants.LABEL_ENCODING['S03ASAScore']}"
+    if input.ASA not in CATEGORY_ENCODING["S03ASAScore"]:
+        error = f"Invalid ASA : {input.ASA}. Must be one of {CATEGORY_ENCODING['S03ASAScore']}"
         raise ValidationError(error_msg=error, status_code=400)
 
-    if input.Cardio not in constants.LABEL_ENCODING["S03CardiacSigns"]:
-        error = f"Invalid Cardiac Status : {input.Cardio}. Must be one of {constants.LABEL_ENCODING['S03CardiacSigns']}"
+    if input.Cardio not in CATEGORY_ENCODING["S03CardiacSigns"]:
+        error = f"Invalid Cardiac Status : {input.Cardio}. Must be one of {CATEGORY_ENCODING['S03CardiacSigns']}"
         raise ValidationError(error_msg=error, status_code=400)
 
-    if input.Resp not in constants.LABEL_ENCODING["S03RespiratorySigns"]:
-        error = f"Invalid Respiratory Status : {input.Resp}. Must be one of {constants.LABEL_ENCODING['S03RespiratorySigns']}"
+    if input.Resp not in CATEGORY_ENCODING["S03RespiratorySigns"]:
+        error = f"Invalid Respiratory Status : {input.Resp}. Must be one of {CATEGORY_ENCODING['S03RespiratorySigns']}"
         raise ValidationError(error_msg=error, status_code=400)
 
-    if input.Malignancy not in constants.LABEL_ENCODING["S03DiagnosedMalignancy"]:
-        error = f"Invalid Malignancy : {input.Malignancy}. Must be one of {constants.LABEL_ENCODING['S03DiagnosedMalignancy']}"
+    if input.Malignancy not in CATEGORY_ENCODING["S03DiagnosedMalignancy"]:
+        error = f"Invalid Malignancy : {input.Malignancy}. Must be one of {CATEGORY_ENCODING['S03DiagnosedMalignancy']}"
         raise ValidationError(error_msg=error, status_code=400)
 
-    if input.Soiling not in constants.LABEL_ENCODING["S03Pred_Peritsoil"]:
-        error = f"Invalid Peritoneal Soiling : {input.Soiling }. Must be one of {constants.LABEL_ENCODING['S03Pred_Peritsoil']}"
+    if input.Soiling not in CATEGORY_ENCODING["S03Pred_Peritsoil"]:
+        error = f"Invalid Peritoneal Soiling : {input.Soiling }. Must be one of {CATEGORY_ENCODING['S03Pred_Peritsoil']}"
+        raise ValidationError(error_msg=error, status_code=400)
+
+    if input.GCS not in CATEGORY_ENCODING["S03GlasgowComaScore"]:
+        error = f"Invalid GCS : {input.GCS }. Must be one of {CATEGORY_ENCODING['S03GlasgowComaScore']}"
+        raise ValidationError(error_msg=error, status_code=400)
+
+    if input.Indication not in CATEGORY_ENCODING["Indication"]:
+        error = f"Invalid indication : {input.Indication }. Must be one of {CATEGORY_ENCODING['Indication']}"
         raise ValidationError(error_msg=error, status_code=400)
 
     # TODO add in indications

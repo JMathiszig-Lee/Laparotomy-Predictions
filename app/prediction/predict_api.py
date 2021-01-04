@@ -23,8 +23,8 @@ async def predict(prediction: Prediction):
         # go straight to mortality prediction
         result = predict_mortality([processed.convert_to_list()], 1000, seed)
     else:
-        lactates = await impute_lactate(processed.convert_to_list()[:17], 5, seed)
-        albumins = await impute_albumin(processed.convert_to_list()[:17], 5, seed)
+        lactates = await impute_lactate(processed.convert_to_list()[:17], 10, seed)
+        albumins = await impute_albumin(processed.convert_to_list()[:17], 10, seed)
 
         filled_in: List[ProcessedPrediction] = []
 
@@ -53,7 +53,7 @@ async def predict(prediction: Prediction):
             filled_lists.append(i.convert_to_list())
 
         result = predict_mortality(
-            features=filled_lists, n_samples_per_row=10, random_seed=seed
+            features=filled_lists, n_samples_per_row=100, random_seed=seed
         )
 
     prediction_result = {"ID": predict_ID, "Seed": seed, "Result": result.tolist()}

@@ -43,6 +43,7 @@
         var chart = new google.visualization.Histogram(document.getElementById('histogram'));
         chart.draw(data, options);
         }
+
         </script>
         {% endif%}
     </head>
@@ -55,7 +56,14 @@
             
         </div>
     </body>
-    
+    {% if results %}
+    <script>
+        
+        {% for field, value in values.items() %}
+            document.getElementById('{{field}}').value='{{value}}';
+        {% endfor %}
+    </script>
+    {% endif %}
     <script type="text/javascript" src="/static/js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript" src="/static/js/materialize.js"></script>
     <script type="text/javascript" src="/static/js/formhelper.js"></script>

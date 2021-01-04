@@ -4,7 +4,7 @@ import pandas as pd
 from pygam import LinearGAM, LogisticGAM, s
 from scipy.special import expit
 
-import app.predict as predict
+import app.prediction.predict as predict
 
 
 def lineargam_data(n_rows: int) -> Tuple[np.ndarray, np.ndarray]:

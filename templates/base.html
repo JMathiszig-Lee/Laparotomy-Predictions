@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-UK">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Probablistic mortality risk calculator for Emergency Laparotomies">
+        <meta name="author" content="Jakob Mathiszig-Lee and Finneas Catling">
+
+        <title>Risk Prediction</title>
+        <link href="/static/css/materialize.css" rel="stylesheet">
+
+        {% if results %}
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script>
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+        // Define the chart to be drawn.
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'Mortality');
+        data.addRows([
+            {% for result in results.Result %}
+                [{{result}}],
+            {% endfor %}
+        ]);
+        var options = {
+            // width: '1000',
+            height: '800',
+            chartArea: {'width': '90%', 'height': '80%'},
+            legend: { position: 'none' },
+            vAxis: { gridlines: 'none' },
+            hAxis: {
+                title: 'Mortality',
+                format: 'percent'
+            },
+
+            histogram: {
+            bucketSize: 0.01,
+            minValue: 0,
+            maxValue: 1
+            }
+        };
+        // Instantiate and draw the chart.
+        var chart = new google.visualization.Histogram(document.getElementById('histogram'));
+        chart.draw(data, options);
+        }
+        </script>
+        {% endif%}
+    </head>
+
+    <body>
+        <div class="container">
+  
+                {% block content %}
+                {% endblock %}
+            
+        </div>
+    </body>
+    
+    <script type="text/javascript" src="/static/js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/materialize.js"></script>
+    <script type="text/javascript" src="/static/js/formhelper.js"></script>
+</html>

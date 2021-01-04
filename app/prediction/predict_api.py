@@ -26,7 +26,7 @@ async def predict(prediction: Prediction):
         lactates = await impute_lactate(processed.convert_to_list()[:17], 5, seed)
         albumins = await impute_albumin(processed.convert_to_list()[:17], 5, seed)
 
-        filled_in: List(ProcessedPrediction) = []
+        filled_in: List[ProcessedPrediction] = []
 
         if processed.Lactate_missing == 1:
             filled_in = complete_input(

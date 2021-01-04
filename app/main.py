@@ -6,8 +6,10 @@ from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 from starlette.requests import Request
 
+from models import Prediction
 
-templates= Jinja2Templates('templates')
+Form = fastapi.Form
+templates = Jinja2Templates("templates")
 
 api = fastapi.FastAPI()
 
@@ -17,15 +19,36 @@ def configure():
 
 
 def configure_routing():
-    api.mount('/static', StaticFiles(directory='static'), name='static')
+    api.mount("/static", StaticFiles(directory="static"), name="static")
     api.include_router(predict_api.router)
 
 
 @api.get("/", include_in_schema=False)
 async def index(request: Request):
     """ index page """
-    data = {'request': request}
-    return templates.TemplateResponse('index.html', data)
+    data = {"request": request}
+    return "watch this space"
+
+
+@api.get("/form", include_in_schema=False)
+async def form(request: Request):
+    """ form page """
+    data = {"request": request}
+    return templates.TemplateResponse("form.html", data)
+
+
+@api.post("/form", include_in_schema=False)
+async def post_form(
+    request: Request,
+):
+    """ form handling """
+    print("---")
+    form_data = await request.form()
+
+    pred = Prediction(**form_data)
+    print(pred)
+    results = await predict_api.predict(pred)
+    return {"data": results}
 
 
 @api.get("/verify")
@@ -35,8 +58,8 @@ def verify(calculation_id: str):
     return message
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     configure()
-    uvicorn.run(api, port=8000, host='127.0.0.1')
+    uvicorn.run(api, port=8000, host="127.0.0.1")
 else:
     configure()

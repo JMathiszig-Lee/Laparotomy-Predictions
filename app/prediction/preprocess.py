@@ -66,7 +66,7 @@ def validate_categories(input: Prediction):
         error = f"Invalid Peritoneal Soiling : {input.Soiling }. Must be one of {constants.LABEL_ENCODING['S03Pred_Peritsoil']}"
         raise ValidationError(error_msg=error, status_code=400)
 
-    #TODO add in indications
+    # TODO add in indications
 
 
 def winsorize(df: Dict, winsor_thresholds: Dict[str, Tuple[float, float]]) -> Dict:

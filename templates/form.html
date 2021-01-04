@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <form class="input-field col s4" method="POST">
+        <div class="row">
+            <div class="input-field col s6">
+                <label>Age</label>
+                <input name="Age" type="number" required>
+            </div>
+            <div class="input-field col s6">
+                <select name="ASA" required>
+                    <option value="" disabled selected>Select ASA</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <label>ASA</label>
+            </div>
+            <div class="input-field col s6">
+                <label>GCS</label>
+                <input name="GCS" type="number"required>
+            </div>
+            <div class="input-field col s6">
+                <label>White Cell Count</label>
+                <input name="WCC" type="number" step="0.1" required>
+            </div>
+            <div class="input-field col s6">
+                <label>Heart Rate</label>
+                <input name="HR" type="number" required>
+            </div>
+            <div class="input-field col s6">
+                <label>Systolic Blood Pressure</label>
+                <input name="SBP" type="number" required>
+            </div>
+            <div class="input-field col s6">
+                <label>Sodium</label>
+                <input name="Na" type="number" required>
+            </div>
+            <div class="input-field col s6">
+                <label>Potassium</label>
+                <input name="K" type="number" step="0.1" required>
+            </div>
+            <div class="input-field col s6">
+                <label>Urea</label>
+                <input name="Urea" type="number" step="0.1" required>
+            </div>
+            <div class="input-field col s6">
+                <label>Creatanine</label>
+                <input name="Creat" type="number" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <label>Lactate</label>
+                <input name="Lactate" type="number" step="0.1" >
+            </div>
+            <div class="input-field col s6">
+                <label>Albumin</label>
+                <input name="Albumin" type="number" >
+            </div>
+        </div>
+        <div class="row">
+            <div class=" switch col s6">
+                <h6>Does the Patient have an arythmia?</h6>
+                <label>
+                    No
+                    <input name="Sinus" type="checkbox" >
+                    <span class="lever"></span>
+                    Yes
+                </label>
+                <p>Includes sinus tachycardiac or rate controlled AF</p>
+            </div>
+            <div class="switch col s6">
+                <h6>Was a CT scan performed?</h6>
+                <label>
+                    No
+                    <input name="CT_performed" type="checkbox" >
+                    <span class="lever"></span>
+                    Yes
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select name="Indication" required>
+                    <option value="" disabled selected>What is the Indication for surgery?</option>
+                    <option value="1">SmallBowelObstruction</option>
+                    <option value="2">IntestinalObstruction</option>
+                    <option value="3">Perforation</option>
+                    <option value="4">LargeBowelObstruction</option>
+                    <option value="5">Peritonitis</option>
+                    <option value="6">Ischaemia</option>
+                    <option value="7">Haemorrhage</option>
+                    <option value="8">Colitis</option>
+                    <option value="9">Other</option>
+                    <option value="10">AbdominalAbscess</option>
+                    <option value="11">AnastomoticLeak</option>
+                    <option value="12">IncarceratedHernia</option>
+                    <option value="13">Volvulus</option>
+                    <option value="14">Missing</option>
+                </select>
+                <label>Indication</label>
+            </div>
+            <div class="input-field col s12">
+                <select name="Cardio" required>
+                    <option value="" disabled selected>Select Cardiac Impairement</option>
+                    <option value="1">No Cardiac Failure</option>
+                    <option value="2">diuretic, digoxin, Rx for angina or hypertension</option>
+                    <option value="4">peripheral oedema, warfarin, borderline cardiomyopathy</option>
+                    <option value="8">raised JVP, cardiomegaly</option>
+                </select>
+                <label>Cardiac</label>
+            </div>
+            <div class="input-field col s12">
+                <select name="Resp" required>
+                    <option value="" disabled selected>Select Respiratory Impairement</option>
+                    <option value="1">No dyspnoea</option>
+                    <option value="2">dyspnoea on exertion, mild COAD</option>
+                    <option value="4">limiting dyspnoea, moderate COAD</option>
+                    <option value="8">dyspnoea at rest, pulmonary fibrosis/consolidation </option>
+                </select>
+                <label>Cardiac</label>
+            </div>
+            <div class="input-field col s12">
+                <select name="Malignancy" required>
+                    <option value="" disabled selected>Malignancy Status</option>
+                    <option value="1">No malignancy</option>
+                    <option value="2">primary malignancy only</option>
+                    <option value="4">malignancy + nodal mets</option>
+                    <option value="8">malignancy + distant mets</option>
+                </select>
+                <label>Malignancy</label>
+            </div>
+            <div class="input-field col s12">
+                <select name="Soiling" required>
+                    <option value="" disabled selected>Predicted Peritoneal Soiling</option>
+                    <option value="1">No soiling</option>
+                    <option value="2">minor soiling</option>
+                    <option value="4">local pus</option>
+                    <option value="8">free bowel content, pus or blood</option>
+                </select>
+                <label>Soiling</label>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+            </button>
+        </div>
+        
+    </form>
+</div>
+{% endblock %}

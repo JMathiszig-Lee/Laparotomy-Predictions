@@ -8,3 +8,7 @@ ALBUMIN_GAM = study_export["albumin"]["model"]
 
 LACTATE_TRANSFORMER = study_export["lactate"]["transformer"]
 ALBUMIN_TRANSFORMER = study_export["albumin"]["transformer"]
+
+
+if __name__ == "__main__":
+    print(study_export["mortality"])

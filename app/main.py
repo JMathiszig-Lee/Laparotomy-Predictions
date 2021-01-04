@@ -1,5 +1,6 @@
 import fastapi
 import uvicorn
+import json
 
 from prediction import predict_api
 from starlette.staticfiles import StaticFiles
@@ -44,11 +45,14 @@ async def post_form(
     """ form handling """
     print("---")
     form_data = await request.form()
-
+    # TODO we need some logic to handle missing lactate/albumin and sliders here
     pred = Prediction(**form_data)
     print(pred)
+
     results = await predict_api.predict(pred)
-    return {"data": results}
+    data = {"request": request, "results": json.loads(results.body)}
+    print(data)
+    return templates.TemplateResponse("form.html", data)
 
 
 @api.get("/verify")

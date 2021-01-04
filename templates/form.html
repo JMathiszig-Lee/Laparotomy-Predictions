@@ -149,5 +149,21 @@
         </div>
         
     </form>
+    <div class="col s8">
+
+        {% if results %}
+        <div class="row">
+            <h5>ID:</h5> {{results.ID}}
+        </div>
+        <div class="row">
+            <h5>Seed:</h5> {{results.Seed}}
+        </div>
+        <div class="row">
+            <h5>Results:</h5> {{results.Result}}
+        </div>
+        {% endif%}
+        
+        
+    </div>
 </div>
 {% endblock %}

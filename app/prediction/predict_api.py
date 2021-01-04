@@ -21,7 +21,7 @@ async def predict(prediction: Prediction):
 
     if processed.Lactate_missing == 0 and processed.Albumin_missing == 0:
         # go straight to mortality prediction
-        result = predict_mortality([processed.convert_to_list()], 100, seed)
+        result = predict_mortality([processed.convert_to_list()], 1000, seed)
     else:
         lactates = await impute_lactate(processed.convert_to_list()[:17], 5, seed)
         albumins = await impute_albumin(processed.convert_to_list()[:17], 5, seed)

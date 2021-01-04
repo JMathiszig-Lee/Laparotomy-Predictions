@@ -149,7 +149,7 @@
         </div>
         
     </form>
-    <div class="col s8">
+    <div class="col s8 ">
 
         {% if results %}
         <div class="row">
@@ -159,7 +159,8 @@
             <h5>Seed:</h5> {{results.Seed}}
         </div>
         <div class="row">
-            <h5>Results:</h5> {{results.Result}}
+            <h5>Results:</h5>
+            <div id="histogram"></div>
         </div>
         {% endif%}
         

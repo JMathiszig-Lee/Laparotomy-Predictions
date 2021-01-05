@@ -1,7 +1,7 @@
 import fastapi
 import uuid
 
-from models import Prediction, ProcessedPrediction
+from app.models import Prediction, ProcessedPrediction
 from typing import List
 from prediction.preprocess import pre_process_input
 from prediction.predict import predict_mortality

@@ -1,6 +1,6 @@
 import pickle
 
-study_export = pickle.load(open("./production_assets.pkl", "rb"))
+study_export = pickle.load(open("production_assets.pkl", "rb"))
 
 MORTALTIY_GAM = study_export["mortality"]["model"]
 LACTATE_GAM = study_export["lactate"]["model"]

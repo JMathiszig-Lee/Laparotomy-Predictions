@@ -6,7 +6,7 @@ from Fixtures.gams import (
     ALBUMIN_TRANSFORMER,
 )
 from typing import List
-from models import ProcessedPrediction
+from app.models import ProcessedPrediction
 
 
 async def impute_lactate(missing_vars: List, n_samples: int, seed: int) -> List[List]:

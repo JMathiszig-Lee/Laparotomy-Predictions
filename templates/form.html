@@ -6,10 +6,10 @@
         <div class="row">
             <div class="input-field col s6">
                 <label>Age</label>
-                <input name="Age" type="number" required>
+                <input name="Age" type="number" required id='Age'>
             </div>
             <div class="input-field col s6">
-                <select name="ASA" required>
+                <select name="ASA" required id="ASA">
                     <option value="" disabled selected>Select ASA</option>
                     <option value="0">1 (No systemic disease)</option>
                     <option value="1">2 (Mild systemic disease)</option>
@@ -21,45 +21,45 @@
             </div>
             <div class="input-field col s6">
                 <label>GCS</label>
-                <input name="GCS" type="number"required>
+                <input name="GCS" type="number" required id="GCS">
             </div>
             <div class="input-field col s6">
                 <label>White Cell Count</label>
-                <input name="WCC" type="number" step="0.1" required>
+                <input name="WCC" type="number" step="0.1" required id="WCC">
             </div>
             <div class="input-field col s6">
                 <label>Heart rate</label>
-                <input name="HR" type="number" required>
+                <input name="HR" type="number" required id="HR">
             </div>
             <div class="input-field col s6">
                 <label>Systolic blood pressure</label>
-                <input name="SBP" type="number" required>
+                <input name="SBP" type="number" required id="SBP">
             </div>
             <div class="input-field col s6">
                 <label>Sodium</label>
-                <input name="Na" type="number" required>
+                <input name="Na" type="number" id="Na" required>
             </div>
             <div class="input-field col s6">
                 <label>Potassium</label>
-                <input name="K" type="number" step="0.1" required>
+                <input name="K" type="number" step="0.1" id="K" required>
             </div>
             <div class="input-field col s6">
                 <label>Urea</label>
-                <input name="Urea" type="number" step="0.1" required>
+                <input name="Urea" type="number" step="0.1" id="Urea" required>
             </div>
             <div class="input-field col s6">
                 <label>Creatinine</label>
-                <input name="Creat" type="number" required>
+                <input name="Creat" type="number" id="Creat" required>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s6">
                 <label>Lactate</label>
-                <input name="Lactate" type="number" step="0.1" >
+                <input name="Lactate" type="number" id="Lactate" step="0.1" >
             </div>
             <div class="input-field col s6">
                 <label>Albumin</label>
-                <input name="Albumin" type="number" >
+                <input name="Albumin" type="number" id="Albumin" >
             </div>
         </div>
         <div class="row">
@@ -67,7 +67,7 @@
                 <h6>Cardiac arrhythmia?</h6>
                 <label>
                     No
-                    <input name="Sinus" type="checkbox" >
+                    <input name="Sinus" type="checkbox" id="Sinus">
                     <span class="lever"></span>
                     Yes
                 </label>
@@ -77,7 +77,7 @@
                 <h6>CT abdo/pelvis performed?</h6>
                 <label>
                     No
-                    <input name="CT_performed" type="checkbox" >
+                    <input name="CT_performed" type="checkbox" id="CT_performed">
                     <span class="lever"></span>
                     Yes
                 </label>
@@ -85,7 +85,7 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <select name="Indication" required>
+                <select name="Indication" id="Indication" required>
                     <option value="" disabled selected>Select indication</option>
                     <option value="0">Small bowel obstruction</option>
                     <option value="3">Large bowel obstruction</option>
@@ -104,7 +104,7 @@
                 <label>Indication for surgery</label>
             </div>
             <div class="input-field col s12">
-                <select name="Cardio" required>
+                <select name="Cardio" id="Cardio" required>
                     <option value="" disabled selected>Select cardiac status</option>
                     <option value="0">None</option>
                     <option value="1">Diuretic, digoxin, Rx for angina or hypertension</option>
@@ -114,7 +114,7 @@
                 <label>Cardiac status</label>
             </div>
             <div class="input-field col s12">
-                <select name="Resp" required>
+                <select name="Resp" id="Resp" required>
                     <option value="" disabled selected>Select respiratory status</option>
                     <option value="0">None</option>
                     <option value="1">Dyspnoea on exertion, mild COAD</option>
@@ -124,7 +124,7 @@
                 <label>Respiratory status</label>
             </div>
             <div class="input-field col s12">
-                <select name="Malignancy" required>
+                <select name="Malignancy" id="Malignancy" required>
                     <option value="" disabled selected>Select malignancy</option>
                     <option value="0">None</option>
                     <option value="1">Primary only</option>
@@ -134,7 +134,7 @@
                 <label>Malignancy</label>
             </div>
             <div class="input-field col s12">
-                <select name="Soiling" required>
+                <select name="Soiling" id="Soiling" required>
                     <option value="" disabled selected>Select peritoneal soiling</option>
                     <option value="0">None</option>
                     <option value="1">Serous fluid</option>

@@ -1,5 +1,5 @@
 from .predict import impute
-from Fixtures.gams import (
+from app.Fixtures.gams import (
     LACTATE_GAM,
     ALBUMIN_GAM,
     LACTATE_TRANSFORMER,

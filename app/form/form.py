@@ -20,9 +20,7 @@ async def form(request: Request):
 
 
 @router.post("/form", include_in_schema=False)
-async def post_form(
-    request: Request,
-):
+async def post_form(request: Request,):
     """ form handling """
     form_data = await request.form()
     # TODO we need some logic to handle missing lactate/albumin and sliders here
@@ -43,7 +41,10 @@ async def post_form(
 
     pred = Prediction(**form_dict)
     results = await predict_api.predict(pred)
-    
-    print(await request.form())
-    data = {"request": request, "results": json.loads(results.body), "values": dict(form_data)}
+
+    data = {
+        "request": request,
+        "results": json.loads(results.body),
+        "values": dict(form_data),
+    }
     return templates.TemplateResponse("form.html", data)

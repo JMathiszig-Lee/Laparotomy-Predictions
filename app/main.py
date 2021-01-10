@@ -1,8 +1,8 @@
 import fastapi
 import uvicorn
 
-from .prediction import predict_api
-from .form import form
+from app.prediction import predict_api
+from app.form import form
 from starlette.staticfiles import StaticFiles
 from starlette.requests import Request
 

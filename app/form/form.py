@@ -41,6 +41,5 @@ async def post_form(request: Request,):
     pred = Prediction(**form_dict)
     results = await predict_api.predict(pred)
     
-    print(await request.form())
     data = {"request": request, "results": json.loads(results.body), "values": dict(form_data)}
     return templates.TemplateResponse("form.html", data)

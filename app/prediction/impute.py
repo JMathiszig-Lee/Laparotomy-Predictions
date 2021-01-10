@@ -1,12 +1,12 @@
 from .predict import impute
-from Fixtures.gams import (
+from app.Fixtures.gams import (
     LACTATE_GAM,
     ALBUMIN_GAM,
     LACTATE_TRANSFORMER,
     ALBUMIN_TRANSFORMER,
 )
 from typing import List
-from models import ProcessedPrediction
+from app.models import ProcessedPrediction
 
 
 async def impute_lactate(missing_vars: List, n_samples: int, seed: int) -> List[List]:

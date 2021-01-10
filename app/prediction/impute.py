@@ -1,4 +1,4 @@
-from .predict import impute
+from app.prediction.predict import impute
 from app.Fixtures.gams import (
     LACTATE_GAM,
     ALBUMIN_GAM,

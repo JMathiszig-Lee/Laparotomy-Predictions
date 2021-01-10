@@ -3,9 +3,9 @@ import uuid
 
 from models import Prediction, ProcessedPrediction
 from typing import List
-from prediction.preprocess import pre_process_input
-from prediction.predict import predict_mortality
-from prediction.impute import impute_lactate, impute_albumin, complete_input
+from .preprocess import pre_process_input
+from .predict import predict_mortality
+from .impute import impute_lactate, impute_albumin, complete_input
 
 router = fastapi.APIRouter()
 

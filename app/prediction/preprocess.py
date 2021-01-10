@@ -1,6 +1,6 @@
-from Fixtures.gams import CATEGORY_ENCODING
-from Fixtures import constants
-from models import Prediction, ValidationError, ProcessedPrediction
+from app.Fixtures.gams import CATEGORY_ENCODING
+from app.Fixtures import constants
+from app.models import Prediction, ValidationError, ProcessedPrediction
 from typing import Dict, Tuple
 
 

@@ -4,8 +4,8 @@ import json
 from starlette.templating import Jinja2Templates
 from starlette.requests import Request
 
-from models import Prediction
-from prediction import predict_api
+from app.models import Prediction
+from app.prediction import predict_api
 
 
 templates = Jinja2Templates("templates")
@@ -20,12 +20,9 @@ async def form(request: Request):
 
 
 @router.post("/form", include_in_schema=False)
-async def post_form(
-    request: Request,
-):
+async def post_form(request: Request,):
     """ form handling """
     form_data = await request.form()
-    # TODO we need some logic to handle missing lactate/albumin and sliders here
     form_dict = dict(form_data)
 
     # sliders mean bools not passed if false

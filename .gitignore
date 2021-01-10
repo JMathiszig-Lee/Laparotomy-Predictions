@@ -131,4 +131,4 @@ dmypy.json
 #vscode
 .vscode/
 
-production_assets.pkl
+.production_assets.pkl

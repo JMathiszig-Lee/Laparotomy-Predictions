@@ -4,7 +4,7 @@ from numpy.random import RandomState
 from sklearn.preprocessing import QuantileTransformer
 from pygam import GAM, LinearGAM
 from pygam.distributions import NormalDist
-from app.Fixtures.gams import MORTALTIY_GAM
+from Fixtures.gams import MORTALTIY_GAM
 
 
 def quick_sample(

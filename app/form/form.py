@@ -4,8 +4,8 @@ import json
 from starlette.templating import Jinja2Templates
 from starlette.requests import Request
 
-from models import Prediction
-from prediction import predict_api
+from app.models import Prediction
+from app.prediction import predict_api
 
 
 templates = Jinja2Templates("templates")

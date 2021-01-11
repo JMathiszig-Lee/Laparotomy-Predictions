@@ -20,7 +20,9 @@ async def form(request: Request):
 
 
 @router.post("/form", include_in_schema=False)
-async def post_form(request: Request,):
+async def post_form(
+    request: Request,
+):
     """ form handling """
     form_data = await request.form()
     form_dict = dict(form_data)

@@ -60,7 +60,7 @@ def test_validate_cats():
         preprocess.validate_categories(pred_model)
 
     pred_model.Resp = 2
-    pred_model.Soiling = 3
+    pred_model.Soiling = 7
     # tests soiling
     with pytest.raises(ValidationError):
         preprocess.validate_categories(pred_model)

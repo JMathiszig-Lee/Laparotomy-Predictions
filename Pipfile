@@ -18,6 +18,7 @@ python-multipart = "*"
 [dev-packages]
 pytest = "*"
 flake8 = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.8.6"

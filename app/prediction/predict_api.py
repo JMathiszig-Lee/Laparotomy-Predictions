@@ -1,8 +1,7 @@
 import fastapi
 import uuid
 
-from app.models import Prediction, ProcessedPrediction
-from typing import List
+from app.models import Prediction, ProcessedPrediction, PredictionResult
 from app.prediction.preprocess import pre_process_input
 from app.prediction.predict import predict_mortality
 from app.prediction.impute import impute_lactate, impute_albumin, complete_input
@@ -10,7 +9,7 @@ from app.prediction.impute import impute_lactate, impute_albumin, complete_input
 router = fastapi.APIRouter()
 
 
-@router.post("/predict")
+@router.post("/predict", response_model=PredictionResult)
 async def predict(prediction: Prediction):
     """ Stuff to do with prediction goes here """
 

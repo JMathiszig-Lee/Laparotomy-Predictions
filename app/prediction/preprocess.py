@@ -64,7 +64,7 @@ def validate_categories(input: Prediction):
 
     if input.Soiling not in CATEGORY_ENCODING["S03Pred_Peritsoil"]:
         error = f"Invalid Peritoneal Soiling : {input.Soiling }. Must be one of {CATEGORY_ENCODING['S03Pred_Peritsoil']}"
-        raise ValidationError(error_msg=error, status_code=400)
+        raise ValidationError(error_msg=error, status_code=422)
 
     if input.GCS not in CATEGORY_ENCODING["S03GlasgowComaScore"]:
         error = f"Invalid GCS : {input.GCS }. Must be one of {CATEGORY_ENCODING['S03GlasgowComaScore']}"

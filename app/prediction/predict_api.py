@@ -1,23 +1,31 @@
 import fastapi
 import uuid
 
-from app.models import Prediction, ProcessedPrediction
-from typing import List
+from app.models import (
+    Prediction,
+    ProcessedPrediction,
+    PredictionResult,
+    ValidationError,
+)
 from app.prediction.preprocess import pre_process_input
 from app.prediction.predict import predict_mortality
 from app.prediction.impute import impute_lactate, impute_albumin, complete_input
+from typing import List
 
 router = fastapi.APIRouter()
 
 
-@router.post("/predict")
+@router.post("/predict", response_model=PredictionResult)
 async def predict(prediction: Prediction):
     """ Stuff to do with prediction goes here """
 
     predict_ID = str(uuid.uuid4())
     seed = abs(hash(predict_ID)) & 0xFFFFFFFF
 
-    processed = pre_process_input(prediction)
+    try:
+        processed = pre_process_input(prediction)
+    except ValidationError as ve:
+        raise fastapi.HTTPException(status_code=ve.status_code, detail=ve.error_msg)
 
     if processed.Lactate_missing == 0 and processed.Albumin_missing == 0:
         # go straight to mortality prediction

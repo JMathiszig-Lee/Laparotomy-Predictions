@@ -1,7 +1,12 @@
 import fastapi
 import uuid
 
-from app.models import Prediction, ProcessedPrediction, PredictionResult, ValidationError
+from app.models import (
+    Prediction,
+    ProcessedPrediction,
+    PredictionResult,
+    ValidationError,
+)
 from app.prediction.preprocess import pre_process_input
 from app.prediction.predict import predict_mortality
 from app.prediction.impute import impute_lactate, impute_albumin, complete_input
@@ -34,7 +39,7 @@ async def predict(prediction: Prediction):
         if processed.Lactate_missing == 1:
             filled_in = complete_input(
                 imputed=lactates, impute_list=[processed], Lactate=True
-            )   
+            )
 
             if processed.Albumin_missing == 1:
                 filled_in = complete_input(

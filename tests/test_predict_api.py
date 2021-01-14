@@ -27,8 +27,9 @@ pred = {
     "Indication": 1,
     "Malignancy": 2,
     "Soiling": 2,
-    "Lactate": 1
+    "Lactate": 1,
 }
+
 
 def test_predict_api_both_impute():
     response = client.post(

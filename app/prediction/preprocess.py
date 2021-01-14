@@ -2,7 +2,7 @@ from app.Fixtures.gams import CATEGORY_ENCODING
 from app.Fixtures import constants
 from app.models import Prediction, ValidationError, ProcessedPrediction
 from typing import Dict, Tuple
-from fastapi import HTTPException
+
 
 def pre_process_input(pred_input: Prediction) -> ProcessedPrediction:
     """

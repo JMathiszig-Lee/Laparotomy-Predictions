@@ -5,6 +5,8 @@ from pygam import LinearGAM, LogisticGAM, s
 from scipy.special import expit
 
 import app.prediction.predict as predict
+from app.Fixtures.gams import LACTATE_GAM, LACTATE_TRANSFORMER
+from app.Fixtures.gams import MORTALTIY_GAM
 
 
 def lineargam_data(n_rows: int) -> Tuple[np.ndarray, np.ndarray]:

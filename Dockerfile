@@ -9,5 +9,5 @@ RUN pipenv install --system --deploy
 COPY /app /app
 
 EXPOSE ${PORT:-80}
-CMD ["uvicorn", "app.main:api", "--host", "0.0.0.0", "--port", ${PORT:-80}]
+CMD uvicorn app.main:api --host=0.0.0.0 --port=${PORT:-80}
 

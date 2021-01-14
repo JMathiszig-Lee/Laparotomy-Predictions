@@ -30,4 +30,4 @@ jobs:
       if: ${{ always() }}
       run: pipenv run coveralls
       env:
-        github-token: ${{ secrets.COVERALLS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.COVERALLS_TOKEN }}

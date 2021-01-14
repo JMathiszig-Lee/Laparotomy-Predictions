@@ -15,4 +15,5 @@ jobs:
 
     - name: Lint
       uses: lgeiger/black-action@v1.0.1
-      args: ". "
+      with:
+        args: ". "

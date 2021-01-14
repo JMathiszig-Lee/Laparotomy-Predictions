@@ -20,6 +20,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pipenv
         pipenv install --dev
+        pipenv install coveralls --skip-lock
 
     - name: Test with pytest
       run: |
@@ -27,6 +28,6 @@ jobs:
         
     - name: Coveralls
       if: ${{ always() }}
-      uses: coverallsapp/github-action@master
+      run: pipenv run coveralls
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}

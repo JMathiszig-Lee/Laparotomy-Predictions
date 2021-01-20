@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+ <div class="row col s9 offset-s1">
+    <div class="col s12">
+        <div class="col s9 offset-s1">
+            <h4>Probablistic Mortality Prediction</h4>
+
+            <p>This is calculator is the deployment of the model produced as a result of the analysis of data from 127,134 adult emergency laparotomies 
+            included in the National Emergency Lapatomy Audit (<a href="https://www.nela.org.uk/">NELA</a>). The code for our analysis is avilable on
+             <a href="https://github.com/finncatling/lap-risk">GitHub</a> under MIT License</p>
+
+            <p>The work has been submitted to a journal but has <b>NOT</b> yet been peer reviewed and the model is yet to recieve a CE mark. Therefore 
+            the form and API offered here should currently be used <i>ONLY</i> for educational and research purposes and should <u>NOT</u> be used to guide patient care. </p>
+            
+        </div>
+    </div>
+ </div>
+
+ <div class="row">
+    <div class="col s12">
+        <div class="card small col s4 offset-s1">
+            <div class="card-content">
+                <span class="card-title">Interactive form</span>
+                <p>An interactive form is available to use our novel model. Care should be taken to ensure the correct data is filled in, paying particular attention to units.</p>
+            </div>
+            <div class="card-action">
+                <a href="form">Link</a>
+            </div>
+        </div>
+        <div class="card small col s4 offset-s1">
+            <div class="card-content">
+                <span class="card-title">API</span>
+                <p>The model is best consumed via it's API. There is a link to the OpenAPI documentation below. Currently the API is unmetered and free to use but this may change in future if demand is significant.</p>
+            </div>
+            <div class="card-action">
+                <a href="docs">Link</a>
+            </div>
+        </div>
+    </div>
+ </div>
+
+  <div class="row col s9 offset-s1">
+    <div class="col s12">
+        <div class="col s9 offset-s1">
+            <h5>Model Overview</h5>
+
+            <p>The model is uncertainty aware model of mortality after emergency lapraotomy. Lactate and Albumin, if left blank, are imputed using dedicated
+            imputation Generalised Additive Models (GAMs). All other fields are required. The final probabilty distribtion comprises 1000 samples from a final
+            mortality GAM </p>
+            
+            <h5>Study Funding</h5>
+            <p>This research was funded by the National Institute for Health Research (NIHR) Imperial Biomedical Research Centre (BRC) 
+            and was supported by the NIHR comprehensive BRC based at University College London Hospitals NHS Foundation Trust and University College London
+            </p>
+        </div>
+    </div>
+ </div>
+{% endblock %}

@@ -3,11 +3,12 @@ import uvicorn
 
 from app.prediction import predict_api
 from app.form import form
+
+from starlette.templating import Jinja2Templates
 from starlette.staticfiles import StaticFiles
 from starlette.requests import Request
 
-Form = fastapi.Form
-
+templates = Jinja2Templates("templates")
 api = fastapi.FastAPI()
 
 
@@ -24,7 +25,8 @@ def configure_routing():
 @api.get("/", include_in_schema=False)
 async def index(request: Request):
     """ index page """
-    return "watch this space"
+    data = {"request": request}
+    return templates.TemplateResponse("index.html", data)
 
 
 @api.get("/verify")

@@ -83,10 +83,17 @@ class ProcessedPrediction(Prediction):
         return input_list
 
 
+class SummaryStats(BaseModel):
+    Median: float
+    LowerPercentile: float
+    UpperPercentie: float
+
+
 class PredictionResult(BaseModel):
     ID: str
     Seed: int
     Result: List[float]
+    Summary: SummaryStats
 
 
 class ValidationError(Exception):

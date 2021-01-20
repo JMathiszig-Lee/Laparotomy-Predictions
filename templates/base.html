@@ -6,7 +6,7 @@
     <meta name="author" content="Jakob Mathiszig-Lee and Finneas Catling">
 
     <title>Risk Prediction</title>
-    <link href="/static/css/materialize.css" rel="stylesheet">
+    <link href="/static/css/materialize.min.css" rel="stylesheet">
 
     {% if results %}
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -43,22 +43,51 @@
                         minValue: 0.0,
                         maxValue: 1.0,
                         hideBucketItems: 'true'
-                    }
+                    },
+                    fillOpacity: 0.3,
                 };
                 // Instantiate and draw the chart.
                 var chart = new google.visualization.Histogram(document.getElementById('histogram'));
                 chart.draw(data, options);
+
+                //add vertical line to chart
+                var newLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                newLine.setAttribute('id', 'lineId');
+                newLine.setAttribute('style', 'stroke:rgb(0,0,0); stroke-width:2;');        
+                newLine.setAttribute('x1', chart.getChartLayoutInterface().getXLocation({{results.Summary.Median}}));
+                newLine.setAttribute('y1', chart.getChartLayoutInterface().getChartAreaBoundingBox().top);
+                newLine.setAttribute('x2', chart.getChartLayoutInterface().getXLocation({{results.Summary.Median}}));
+                newLine.setAttribute('y2', chart.getChartLayoutInterface().getChartAreaBoundingBox().height + chart.getChartLayoutInterface().getChartAreaBoundingBox().top);
+                $("svg").append(newLine);
             }
         </script>
     {% endif %}
 </head>
-
-<body>
+<nav>
+    <div class="nav-wrapper indigo lighten-1">
+    <ul id="nav-mobile" class="right">
+        <li><a href="/">Home</a></li>
+        <li><a href="form">Form</a></li>
+        <li><a href="docs">API</a></li>
+    </ul>
+    </div>
+</nav>
+<main>
 <div class="container">
     {% block content %}
     {% endblock %}
 </div>
-</body>
+</main>
+<footer class="page-footer indigo lighten-1">
+    <div class="container">
+        Logo goes here
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+        © 2021 Jakob Mathiszig-Lee
+        </div>
+    </div>
+</footer>
 
 {% if results %}
 <script>
@@ -69,6 +98,6 @@
 {% endif %}
 
 <script type="text/javascript" src="/static/js/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="/static/js/materialize.js"></script>
+<script type="text/javascript" src="/static/js/materialize.min.js"></script>
 <script type="text/javascript" src="/static/js/formhelper.js"></script>
 </html>

@@ -29,6 +29,11 @@ async def index(request: Request):
     return templates.TemplateResponse("index.html", data)
 
 
+@api.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    return fastapi.responses.RedirectResponse(url="/static/img/favicon.png")
+
+
 @api.get("/verify")
 def verify(calculation_id: str):
     """ API endpoint to verify previous calculations """

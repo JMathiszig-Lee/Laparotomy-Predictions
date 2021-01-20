@@ -43,17 +43,28 @@
                         minValue: 0.0,
                         maxValue: 1.0,
                         hideBucketItems: 'true'
-                    }
+                    },
+                    fillOpacity: 0.3,
                 };
                 // Instantiate and draw the chart.
                 var chart = new google.visualization.Histogram(document.getElementById('histogram'));
                 chart.draw(data, options);
+
+                //add vertical line to chart
+                var newLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                newLine.setAttribute('id', 'lineId');
+                newLine.setAttribute('style', 'stroke:rgb(0,0,0); stroke-width:2;');        
+                newLine.setAttribute('x1', chart.getChartLayoutInterface().getXLocation({{results.Summary.Median}}));
+                newLine.setAttribute('y1', chart.getChartLayoutInterface().getChartAreaBoundingBox().top);
+                newLine.setAttribute('x2', chart.getChartLayoutInterface().getXLocation({{results.Summary.Median}}));
+                newLine.setAttribute('y2', chart.getChartLayoutInterface().getChartAreaBoundingBox().height + chart.getChartLayoutInterface().getChartAreaBoundingBox().top);
+                $("svg").append(newLine);
             }
         </script>
     {% endif %}
 </head>
 <nav>
-    <div class="nav-wrapper">
+    <div class="nav-wrapper indigo lighten-1">
     <ul id="nav-mobile" class="right">
         <li><a href="/">Home</a></li>
         <li><a href="form">Form</a></li>
@@ -61,13 +72,21 @@
     </ul>
     </div>
 </nav>
-<body>
+<main>
 <div class="container">
     {% block content %}
     {% endblock %}
 </div>
-</body>
-<footer class="page-footer">
+</main>
+<footer class="page-footer indigo lighten-1">
+    <div class="container">
+        Logo goes here
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+        © 2021 Jakob Mathiszig-Lee
+        </div>
+    </div>
 </footer>
 
 {% if results %}

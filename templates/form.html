@@ -164,9 +164,9 @@
         </div>
         <div class="row">
             <h5>Results:</h5>
-            <b>Median Risk:</b> {{results.Summary.Median}}
+            <b>Median Risk:</b> {{"%.2f"|format(results.Summary.Median|float * 100)}}%
             <br>
-            <b>95% Confidence Interval</b>  {{results.Summary.LowerPercentile}}-  {{results.Summary.UpperPercentile}}
+            <b>95% Confidence Interval</b>  {{"%.2f"|format(results.Summary.LowerPercentile|float* 100) }}% - {{"%.2f"|format(results.Summary.UpperPercentile|float * 100)}}%
             <div id="histogram"></div>
         </div>
         {% endif%}

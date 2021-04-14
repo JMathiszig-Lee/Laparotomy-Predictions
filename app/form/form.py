@@ -26,18 +26,20 @@ async def post_form(
     """ form handling """
     form_data = await request.form()
     form_dict = dict(form_data)
+    print(form_dict)
 
     # sliders mean bools not passed if false
     if "CT_performed" not in form_dict:
         form_dict["CT_performed"] = False
     if "Sinus" not in form_dict:
+        form_dict["Sinus"] = True
+    else:
         form_dict["Sinus"] = False
-
+    
     # if lactate or albumin aren't filled they are returned as empty strings by the form
-    if type(form_dict["Lactate"]) == str:
+    if not form_dict["Lactate"]:
         del form_dict["Lactate"]
-
-    if type(form_dict["Albumin"]) == str:
+    if not form_dict["Albumin"]:
         del form_dict["Albumin"]
 
     pred = Prediction(**form_dict)

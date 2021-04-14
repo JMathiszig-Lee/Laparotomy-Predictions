@@ -32,7 +32,7 @@ async def predict(prediction: Prediction):
 
     if processed.Lactate_missing == 0 and processed.Albumin_missing == 0:
         # go straight to mortality prediction
-        result = predict_mortality([processed.convert_to_list()], 1000, RANDOM_SEED)
+        result = predict_mortality([processed.convert_to_list()], 10000, RANDOM_SEED)
     else:
         lactates = await impute_lactate(
             processed.convert_to_list()[:17], 10, RANDOM_SEED
@@ -84,6 +84,7 @@ async def predict(prediction: Prediction):
             "LowerPercentile": f"{lower_percentile:4f}",
             "UpperPercentile": f"{upper_percentile:4f}",
         },
+        "Inputs": prediction.__dict__,
     }
 
     # logging goes here if allowed

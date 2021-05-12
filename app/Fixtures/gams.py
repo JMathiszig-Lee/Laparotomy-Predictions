@@ -1,5 +1,6 @@
-import os, pickle
-from constants import APP_ROOT_DIR
+import os
+import pickle
+from .constants import APP_ROOT_DIR
 
 study_export = pickle.load(open(
     os.path.join(APP_ROOT_DIR, 'Fixtures', 'production_assets.pkl'),

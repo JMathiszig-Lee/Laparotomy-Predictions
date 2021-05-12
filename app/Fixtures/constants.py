@@ -1,3 +1,14 @@
+import os
+
+
+"""
+App root directory. This is dependent on constants.py being one directory
+down from the app directory.
+"""
+APP_ROOT_DIR = os.path.split(
+    os.path.dirname(os.path.abspath(__file__))
+)[0]
+
 RANDOM_SEED = 1067641072
 
 WINSOR_THRESHOLDS = {

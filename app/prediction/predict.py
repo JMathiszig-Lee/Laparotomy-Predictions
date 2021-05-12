@@ -4,7 +4,7 @@ from numpy.random import RandomState
 from sklearn.preprocessing import QuantileTransformer
 from pygam import GAM, LinearGAM
 from pygam.distributions import NormalDist
-from app.Fixtures.gams import MORTALTIY_GAM
+from app.Fixtures.gams import MORTALITY_GAM
 
 
 def quick_sample(
@@ -142,7 +142,7 @@ def predict_mortality(
             (features.shape[0] * n_samples_per_row,)
     """
     return quick_sample(
-        gam=MORTALTIY_GAM,
+        gam=MORTALITY_GAM,
         sample_at_X=features,
         quantity="mu",
         n_draws=n_samples_per_row,

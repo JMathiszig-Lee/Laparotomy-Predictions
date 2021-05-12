@@ -2,7 +2,7 @@ import pickle
 
 study_export = pickle.load(open("app/Fixtures/production_assets.pkl", "rb"))
 
-MORTALTIY_GAM = study_export["mortality"]["model"]
+MORTALITY_GAM = study_export["mortality"]["model"]
 LACTATE_GAM = study_export["lactate"]["model"]
 ALBUMIN_GAM = study_export["albumin"]["model"]
 

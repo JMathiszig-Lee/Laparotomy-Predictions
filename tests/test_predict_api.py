@@ -154,7 +154,7 @@ def test_predict_api_vs_direct_prediction():
     assert response.status_code == 200
     api_pred = np.array(response.json()["Result"])
 
-    # Get a 1-row DataFrame with same columes as input to predict_mortality()
+    # Get a 1-row DataFrame with same columns as input to predict_mortality()
     features = study_export['mortality']['input_data']['describe'].iloc[
         5:6
     ].reset_index(drop=True)

@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 from app.main import api
+from app.Fixtures.gams import study_export
 
 client = TestClient(api)
 
@@ -9,7 +10,7 @@ def test_index():
     assert response.status_code == 200
 
 
-pred = {
+patient1 = {
     "Age": 40,
     "ASA": 3,
     "HR": 87,
@@ -33,7 +34,7 @@ pred = {
 
 def test_predict_api_both_impute():
     response = client.post(
-        "/predict", headers={"Content-Type": "application/json"}, json=pred
+        "/predict", headers={"Content-Type": "application/json"}, json=patient1
     )
     assert response.status_code == 200
 
@@ -42,10 +43,10 @@ def test_predict_api_both_impute():
 
 
 def test_predict_api_alb_impute():
-    pred["Albumin"] = 40
+    patient1["Albumin"] = 40
 
     response = client.post(
-        "/predict", headers={"Content-Type": "application/json"}, json=pred
+        "/predict", headers={"Content-Type": "application/json"}, json=patient1
     )
     assert response.status_code == 200
 
@@ -54,10 +55,10 @@ def test_predict_api_alb_impute():
 
 
 def test_predict_api_basic():
-    pred["Lactate"] = 1
+    patient1["Lactate"] = 1
 
     response = client.post(
-        "/predict", headers={"Content-Type": "application/json"}, json=pred
+        "/predict", headers={"Content-Type": "application/json"}, json=patient1
     )
     assert response.status_code == 200
 
@@ -70,19 +71,19 @@ def test_predict_api_basic():
 
 
 def test_predict_api_invalid_cat():
-    pred["Soiling"] = 7
+    patient1["Soiling"] = 7
     response = client.post(
-        "/predict", headers={"Content-Type": "application/json"}, json=pred
+        "/predict", headers={"Content-Type": "application/json"}, json=patient1
     )
 
     assert response.status_code == 422
 
 
 def test_predict_api_invalid_type():
-    pred["soiling"] = 1
-    pred["SBP"] = 103.4
+    patient1["soiling"] = 1
+    patient1["SBP"] = 103.4
     response = client.post(
-        "/predict", headers={"Content-Type": "application/json"}, json=pred
+        "/predict", headers={"Content-Type": "application/json"}, json=patient1
     )
 
     assert response.status_code == 422

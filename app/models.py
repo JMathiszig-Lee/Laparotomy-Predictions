@@ -56,7 +56,7 @@ class ProcessedPrediction(Prediction):
     Albumin_missing: int = 1
 
     def convert_to_list(self):
-        """ converts object to list in correct order """
+        """converts object to list in correct order"""
         input_list = [
             self.CT_performed,
             self.Arrhythmia,

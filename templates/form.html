@@ -6,9 +6,9 @@
         <div class="col s12">
         </div>
         <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s6 select-field">
                 <label>Age (years)</label>
-                <input name="Age" type="number" required id='Age'>
+                <input name="Age" type="number" required class="validate" id='Age'>
             </div>
             <div class="input-field col s6">
                 <select name="ASA" required id="ASA">
@@ -89,7 +89,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col s12 select-field">
                 <select name="Indication" id="Indication" required>
                     <option value="" disabled selected>Select indication</option>
                     <option value="0">Small bowel obstruction</option>
@@ -108,8 +108,8 @@
                 </select>
                 <label>Indication for surgery</label>
             </div>
-            <div class="input-field col s12">
-                <select name="Cardio" id="Cardio" required>
+            <div class="input-field col s12 select-field">
+                <select name="Cardio" id="Cardio" required class="validate">
                     <option value="" disabled selected>Select cardiac status</option>
                     <option value="0">None</option>
                     <option value="1">Diuretic, digoxin, Rx for angina or hypertension</option>
@@ -118,8 +118,8 @@
                 </select>
                 <label>Cardiac status</label>
             </div>
-            <div class="input-field col s12">
-                <select name="Resp" id="Resp" required>
+            <div class="input-field col s12 select-field">
+                <select name="Resp" id="Resp" required class="validate">
                     <option value="" disabled selected>Select respiratory status</option>
                     <option value="0">None</option>
                     <option value="1">Dyspnoea on exertion, mild COAD</option>
@@ -128,8 +128,8 @@
                 </select>
                 <label>Respiratory status</label>
             </div>
-            <div class="input-field col s12">
-                <select name="Malignancy" id="Malignancy" required>
+            <div class="input-field col s12 select-field">
+                <select name="Malignancy" id="Malignancy" required class="validate">
                     <option value="" disabled selected>Select malignancy</option>
                     <option value="0">None</option>
                     <option value="1">Primary only</option>
@@ -138,8 +138,8 @@
                 </select>
                 <label>Malignancy</label>
             </div>
-            <div class="input-field col s12">
-                <select name="Soiling" id="Soiling" required>
+            <div class="input-field col s12 select-field">
+                <select name="Soiling" id="Soiling" required class="validate">
                     <option value="" disabled selected>Select peritoneal soiling</option>
                     <option value="0">None</option>
                     <option value="1">Serous fluid</option>
@@ -164,10 +164,13 @@
         </div>
         <div class="row">
             <h5>Results:</h5>
-            <b>Median Risk:</b> {{results.Summary.Median}}
+            <b>Median Risk:</b> {{"%.2f"|format(results.Summary.Median|float * 100)}}%
             <br>
-            <b>95% Confidence Interval</b>  {{results.Summary.LowerPercentile}}-  {{results.Summary.UpperPercentile}}
+            <b>95% Confidence Interval</b>  {{"%.2f"|format(results.Summary.LowerPercentile|float* 100) }}% - {{"%.2f"|format(results.Summary.UpperPercentile|float * 100)}}%
             <div id="histogram"></div>
+        </div>
+        <div class="row">
+            <h5>Seed:</h5> {{results.Inputs}}
         </div>
         {% endif%}
         

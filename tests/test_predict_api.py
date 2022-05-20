@@ -50,7 +50,7 @@ def test_predict_api_alb_impute():
     assert response.status_code == 200
 
     body = dict(response.json())
-    assert len(body["Result"]) == 1000
+    assert len(body["Result"]) == 10000
 
 
 def test_predict_api_basic():
@@ -66,7 +66,7 @@ def test_predict_api_basic():
     assert type(body["ID"]) == str
     assert type(body["Seed"]) == int
     assert type(body["Result"]) == list
-    assert len(body["Result"]) == 1000
+    assert len(body["Result"]) == 10000
 
 
 def test_predict_api_invalid_cat():

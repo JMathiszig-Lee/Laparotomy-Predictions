@@ -19,7 +19,7 @@ class Prediction(BaseModel):
     GCS: int
     Resp: int
     Cardio: int
-    Sinus: bool
+    Arrhythmia: bool
     CT_performed: bool
     Indication: int
     Malignancy: int
@@ -36,13 +36,13 @@ class Prediction(BaseModel):
                 "Na": 135,
                 "K": 8,
                 "Urea": 2,
-                "Creat": 4,
+                "Creat": 60,
                 "Lactate": 3.5,
                 "Albumin": 40,
                 "GCS": 15,
                 "Resp": 2,
                 "Cardio": 1,
-                "Sinus": False,
+                "Arrhythmia": False,
                 "CT_performed": True,
                 "Indication": 1,
                 "Malignancy": 2,
@@ -59,7 +59,7 @@ class ProcessedPrediction(Prediction):
         """ converts object to list in correct order """
         input_list = [
             self.CT_performed,
-            self.Sinus,
+            self.Arrhythmia,
             self.Age,
             self.Creat,
             self.Na,

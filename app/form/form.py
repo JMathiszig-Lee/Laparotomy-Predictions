@@ -30,8 +30,8 @@ async def post_form(
     # sliders mean bools not passed if false
     if "CT_performed" not in form_dict:
         form_dict["CT_performed"] = False
-    if "Sinus" not in form_dict:
-        form_dict["Sinus"] = False
+    if "Arrhythmia" not in form_dict:
+        form_dict["Arrhythmia"] = False
 
     # if lactate or albumin aren't filled they are returned as empty strings by the form
     if type(form_dict["Lactate"]) == str:

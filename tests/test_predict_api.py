@@ -22,7 +22,7 @@ pred = {
     "GCS": 15,
     "Resp": 2,
     "Cardio": 1,
-    "Sinus": False,
+    "Arrhythmia": False,
     "CT_performed": True,
     "Indication": 1,
     "Malignancy": 2,

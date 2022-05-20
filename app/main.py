@@ -24,7 +24,7 @@ def configure_routing():
 
 @api.get("/", include_in_schema=False)
 async def index(request: Request):
-    """ index page """
+    """index page"""
     data = {"request": request}
     return templates.TemplateResponse("index.html", data)
 
@@ -36,7 +36,7 @@ def favicon():
 
 @api.get("/verify")
 def verify(calculation_id: str):
-    """ API endpoint to verify previous calculations """
+    """API endpoint to verify previous calculations"""
     message = "this isn't built yet"
     return message
 

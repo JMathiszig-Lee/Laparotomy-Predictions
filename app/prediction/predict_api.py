@@ -20,7 +20,7 @@ router = fastapi.APIRouter()
 
 @router.post("/predict", response_model=PredictionResult)
 async def predict(prediction: Prediction):
-    """ Stuff to do with prediction goes here """
+    """Stuff to do with prediction goes here"""
 
     predict_ID = str(uuid.uuid4())
     # seed = abs(hash(predict_ID)) & 0xFFFFFFFF

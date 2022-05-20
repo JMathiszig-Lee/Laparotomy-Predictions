@@ -5,8 +5,6 @@ from pygam import LinearGAM, LogisticGAM, s
 from scipy.special import expit
 
 import app.prediction.predict as predict
-from app.Fixtures.gams import LACTATE_GAM, LACTATE_TRANSFORMER
-from app.Fixtures.gams import MORTALTIY_GAM
 
 
 def lineargam_data(n_rows: int) -> Tuple[np.ndarray, np.ndarray]:
@@ -53,11 +51,3 @@ def test_quick_sample_logisticgam_mu():
 
     y_samples_mean = np.mean(y_samples, axis=0)
     assert all(np.abs(p_y - y_samples_mean) < 0.25)
-
-
-def test_impute():
-    assert False
-
-
-def test_predict_mortality():
-    assert False

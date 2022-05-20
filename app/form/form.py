@@ -14,7 +14,7 @@ router = fastapi.APIRouter()
 
 @router.get("/form", include_in_schema=False)
 async def form(request: Request):
-    """ form page """
+    """form page"""
     data = {"request": request}
     return templates.TemplateResponse("form.html", data)
 
@@ -23,7 +23,7 @@ async def form(request: Request):
 async def post_form(
     request: Request,
 ):
-    """ form handling """
+    """form handling"""
     form_data = await request.form()
     form_dict = dict(form_data)
 

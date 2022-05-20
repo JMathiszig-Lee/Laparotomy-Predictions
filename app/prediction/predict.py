@@ -78,7 +78,7 @@ def quick_sample(
     else:
         if isinstance(gam.distribution, NormalDist):
             scale = gam.distribution.scale
-            standard_deviation = scale ** 0.5 if scale else 1.0
+            standard_deviation = scale**0.5 if scale else 1.0
             return rnd.normal(
                 loc=mu_shape_n_draws_by_n_samples, scale=standard_deviation, size=None
             )

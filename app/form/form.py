@@ -14,7 +14,7 @@ router = fastapi.APIRouter()
 
 @router.get("/form", include_in_schema=False)
 async def form(request: Request):
-    """ form page """
+    """form page"""
     data = {"request": request}
     return templates.TemplateResponse("form.html", data)
 
@@ -23,7 +23,7 @@ async def form(request: Request):
 async def post_form(
     request: Request,
 ):
-    """ form handling """
+    """form handling"""
     form_data = await request.form()
     form_dict = dict(form_data)
     print(form_dict)
@@ -31,11 +31,9 @@ async def post_form(
     # sliders mean bools not passed if false
     if "CT_performed" not in form_dict:
         form_dict["CT_performed"] = False
-    if "Sinus" not in form_dict:
-        form_dict["Sinus"] = True
-    else:
-        form_dict["Sinus"] = False
-    
+    if "Arrhythmia" not in form_dict:
+        form_dict["Arrhythmia"] = False
+
     # if lactate or albumin aren't filled they are returned as empty strings by the form
     if not form_dict["Lactate"]:
         del form_dict["Lactate"]

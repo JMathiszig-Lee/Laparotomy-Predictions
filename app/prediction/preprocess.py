@@ -74,8 +74,6 @@ def validate_categories(input: Prediction):
         error = f"Invalid indication : {input.Indication }. Must be one of {CATEGORY_ENCODING['Indication']}"
         raise ValidationError(error_msg=error, status_code=400)
 
-    # TODO add in indications
-
 
 def winsorize(df: Dict, winsor_thresholds: Dict[str, Tuple[float, float]]) -> Dict:
     """Winsorize continuous input variables, according to present thresholds.

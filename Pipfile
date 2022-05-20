@@ -15,6 +15,7 @@ scikit-learn = "==0.23.2"
 aiofiles = "*"
 jinja2 = "*"
 python-multipart = "*"
+pytest-asyncio = "*"
 
 [dev-packages]
 pytest = "*"

@@ -9,7 +9,14 @@ from starlette.staticfiles import StaticFiles
 from starlette.requests import Request
 
 templates = Jinja2Templates("templates")
-api = fastapi.FastAPI()
+api = fastapi.FastAPI(
+    title="RUNE Calculator",
+    version="1.0.0",
+    contact={
+        "name": "Jakob Mathiszig-Lee",
+        "email": "jakob.mathiszig-lee06@imperial.ac.uk",
+    },
+)
 
 
 def configure():
@@ -34,12 +41,11 @@ def favicon():
     return fastapi.responses.RedirectResponse(url="/static/img/favicon.png")
 
 
-@api.get("/verify")
-def verify(calculation_id: str):
-    """API endpoint to verify previous calculations"""
-    message = "this isn't built yet"
-    return message
-
+# @api.get("/verify")
+# def verify(calculation_id: str):
+#     """API endpoint to verify previous calculations"""
+#     message = "this isn't built yet"
+#     return message
 
 
 if __name__ == "__main__":

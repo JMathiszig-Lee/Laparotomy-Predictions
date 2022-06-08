@@ -4,7 +4,7 @@
  <div class="row col s9 offset-s1">
     <div class="col s12">
         <div class="col s9 offset-s1">
-            <h4>Probabilistic Mortality Prediction in Emergency Laparotomy</h4>
+            <h4><b>R</b>isk of death is <b>U</b>ncertai<b>N</b> in <b>E</b>mergency laparotomy</h4>
 
             <p>
                 This calculator predicts risk of death in hospital in the 60 days following
@@ -13,13 +13,17 @@
             <p>
                 Our mortality risk model was developed using data from 127,134 adult emergency laparotomies
                 included in the UK's <a href="https://www.nela.org.uk/">National Emergency Laparotomy Audit (NELA)</a>.
-                The <a href="https://github.com/finncatling/lap-risk">model development code</a> is publicly available
+
+                The work has now been peer reviewed and the paper is available open access at <a href=https://www.nature.com/articles/s41746-022-00616-7>npj Digital Medicine</a>
+            </p>
+
+            <p>
+                <a href="https://github.com/finncatling/lap-risk">Model development code</a> is publicly available
                 under MIT License.
             </p>
 
             <p>
-                This work has <b>not</b> yet completed peer review and the model is yet to receive a CE mark. Therefore
-                the web calculator and API offered here should currently be used <b>only</b> for educational and
+                The model is yet to receive a CE mark. Therefore the web calculator and API offered here should currently be used <b>only</b> for educational and
                 research purposes and should <b>not</b> be used to inform patient care.
             </p>
             
@@ -64,6 +68,12 @@
                 In patients where lactate and albumin have not yet been measured, these values can be left blank in the
                 web calculator or API input, and will be imputed using dedicated imputation Generalised Additive Models
                 (GAMs). All other fields are required.
+            </p>
+
+            <h5>Abstract</h5>
+
+            <p>
+                Clinical prediction models typically make point estimates of risk. However, values of key variables are often missing during model development or at prediction time, meaning that the point estimates mask significant uncertainty and can lead to over-confident decision making. We present a model of mortality risk in emergency laparotomy which instead presents a distribution of predicted risks, highlighting the uncertainty over the risk of death with an intuitive visualisation. We developed and validated our model using data from 127134 emergency laparotomies from patients in England and Wales during 2013–2019. We captured the uncertainty arising from missing data using multiple imputation, allowing prospective, patient-specific imputation for variables that were frequently missing. Prospective imputation allows early prognostication in patients where these variables are not yet measured, accounting for the additional uncertainty this induces. Our model showed good discrimination and calibration (95% confidence intervals: Brier score 0.071–0.078, C statistic 0.859–0.873, calibration error 0.031–0.059) on unseen data from 37 hospitals, consistently improving upon the current gold-standard model. The dispersion of the predicted risks varied significantly between patients and increased where prospective imputation occurred. We present a case study that illustrates the potential impact of uncertainty quantification on clinical decision making. Our model improves mortality risk prediction in emergency laparotomy and has the potential to inform decision-makers and assist discussions with patients and their families. Our analysis code was robustly developed and is publicly available for easy replication of our study and adaptation to predicting other outcomes.
             </p>
             
             <h5>Study Funding</h5>

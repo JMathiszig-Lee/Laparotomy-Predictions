@@ -7,6 +7,7 @@ from app.form import form
 from starlette.templating import Jinja2Templates
 from starlette.staticfiles import StaticFiles
 from starlette.requests import Request
+from starlette.middleware.cors import CORSMiddleware
 
 templates = Jinja2Templates("templates")
 
@@ -68,12 +69,21 @@ The Indication for surgery
 """
 api = fastapi.FastAPI(
     title="RUNE Calculator",
-    version="1.0.0",
+    version="1.1.0",
     description=api_description,
     contact={
         "name": "Jakob Mathiszig-Lee",
         "email": "jakob.mathiszig-lee06@imperial.ac.uk",
     },
+)
+
+#allow cors for javascript api calls
+api.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 

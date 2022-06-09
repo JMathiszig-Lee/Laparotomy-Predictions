@@ -93,6 +93,9 @@
 {% if results %}
 <script>
     {% for field, value in values.items() %}
+        {% if value == 'on'%}
+            document.getElementById('{{field}}').checked = true;
+        {% endif %}
         document.getElementById('{{field}}').value='{{value}}';
     {% endfor %}
 </script>

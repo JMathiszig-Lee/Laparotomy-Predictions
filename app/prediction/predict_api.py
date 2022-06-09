@@ -18,7 +18,7 @@ from typing import List
 router = fastapi.APIRouter()
 
 
-@router.post("/predict", response_model=PredictionResult)
+@router.post("/predict", response_model=PredictionResult, tags=["RUNE endpoints"])
 async def predict(prediction: Prediction):
     """
     Rune model API endpoint

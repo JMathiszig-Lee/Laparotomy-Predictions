@@ -1,26 +1,26 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional, List
 
 
 class Prediction(BaseModel):
     """model to define inputs for prediction"""
 
-    Age: int
-    ASA: int
-    HR: int
-    SBP: int
-    WCC: float
-    Na: int
-    K: float
-    Urea: float
-    Creat: int
-    Lactate: Optional[float]
-    Albumin: Optional[int]
-    GCS: int
+    Age: int 
+    ASA: int = Field(ge=0, le=4, default=None, title="ASA grade", description="encoded -1")
+    HR: int = Field(title="Heart Rate")
+    SBP: int = Field(title="Systolic Blood Pressure", description="systolic blood pressure in mmHg")
+    WCC: float = Field(title="White Cell Count", description="white cell count x10^9/L")
+    Na: int = Field(title="Sodium", description="units: mmol/L")
+    K: float = Field(title="Potassium", description="units: mmol/L")
+    Urea: float = Field(title="Urea", description="units: mmol/L")
+    Creat: int = Field(title="Creatanine", description="units: umol/L")
+    Lactate: Optional[float] = Field(title="Lactate", description="units: mmol/L")
+    Albumin: Optional[int] = Field(title="Albumin", description="units: g/L")
+    GCS: int = Field(title="Glasgow Coma Score", ge=3, le=15)
     Resp: int
     Cardio: int
-    Arrhythmia: bool
-    CT_performed: bool
+    Arrhythmia: bool = Field(title="Arrythmia", description="Does the patient have an arrhytmia?")
+    CT_performed: bool = Field(description="Did the patient have a CT pre-operatively?")
     Indication: int
     Malignancy: int
     Soiling: int
